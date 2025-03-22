@@ -25,8 +25,8 @@ import { NgIf } from '@angular/common'
 export class DeluxeUserComponent implements OnInit {
   public membershipCost: number = 0
   public error?: string = undefined
-  public applicationName = 'OWASP Juice Shop'
-  public logoSrc: string = 'assets/public/images/JuiceShop_Logo.png'
+  public applicationName = 'Electron Store'
+  public logoSrc: string = 'assets/public/images/ElectronStore_Logo.jpeg'
 
   public SHOWCASES = [
     {

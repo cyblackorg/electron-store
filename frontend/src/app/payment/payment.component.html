@@ -74,14 +74,14 @@
             <label translate>LABEL_DONATIONS</label>
           </div>
           <small>
-            (<span *ngIf="applicationName === 'OWASP Juice Shop'" translate
-                   [translateParams]="{juiceshop: 'OWASP Juice Shop'}">THANKS_FOR_SUPPORT</span>
-            <span *ngIf="applicationName !== 'OWASP Juice Shop'" translate
-                  [translateParams]="{appname: applicationName}">THANKS_FOR_SUPPORT_CUSTOMIZED</span>
+            (<span *ngIf="applicationName === 'Electron Store'" translate
+                   [translateParams]="{juiceshop: 'Electron Store'}">THANKS_FOR_SUPPORT</span>
+            <span *ngIf="applicationName !== 'Electron Store'" translate
+                  [translateParams]="{appname: applicationName}">THANKS_FOR_SUPPORT_CUSTOM</span>
             <i style="margin-left: 3px;" class="fas fa-heart error"></i>)
           </small>
           <div class="button-container" style="margin-top: 6px;">
-            <a href="https://pwning.owasp-juice.shop/companion-guide/latest/part3/donations.html">
+            <a href="https://electronstore.com/guide/donations.html">
               <button mat-stroked-button><i class="fab fa-stripe fa-lg"></i> {{'BTN_CREDIT_CARD' | translate}}</button>
             </a>
             <button mat-stroked-button (click)="showBitcoinQrCode()" *ngIf="false"><i class="fab fa-btc fa-lg"></i>
@@ -99,26 +99,26 @@
             <label translate>LABEL_MERCHANDISE</label>
           </div>
           <small>
-            (<span *ngIf="applicationName === 'OWASP Juice Shop'" translate
-                   [translateParams]="{juiceshop: 'OWASP Juice Shop'}">OFFICIAL_MERCHANDISE_STORES</span>
-            <span *ngIf="applicationName !== 'OWASP Juice Shop'" translate
-                  [translateParams]="{appname: applicationName}">OFFICIAL_MERCHANDISE_STORES_CUSTOMIZED</span>
+            (<span *ngIf="applicationName === 'Electron Store'" translate
+                   [translateParams]="{juiceshop: 'Electron Store'}">OFFICIAL_MERCHANDISE_STORES</span>
+            <span *ngIf="applicationName !== 'Electron Store'" translate
+                  [translateParams]="{appname: applicationName}">OFFICIAL_MERCHANDISE_STORES_CUSTOM</span>
             <i style="margin-left: 3px;" class="fas fa-thumbs-up confirmation"></i>)
           </small>
           <div class="button-container" style="margin-top: 6px;">
-            <a href="./redirect?to=http://shop.spreadshirt.com/juiceshop">
+            <a href="./redirect?to=http://shop.electronstore.com">
               <button mat-stroked-button><i class="fas fa-tshirt fa-lg"></i> Spreadshirt (US)</button>
             </a>
-            <a href="./redirect?to=http://shop.spreadshirt.de/juiceshop">
+            <a href="./redirect?to=http://shop.electronstore.de">
               <button mat-stroked-button><i class="fas fa-tshirt fa-lg"></i> Spreadshirt (DE)</button>
             </a>
-            <a href="./redirect?to=https://www.stickeryou.com/products/owasp-juice-shop/794">
+            <a href="./redirect?to=https://www.stickeryou.com/products/electron-store/794">
               <button mat-stroked-button><i class="fas fa-sticky-note fa-lg"></i> StickerYou</button>
             </a>
-            <a href="./redirect?to=http://leanpub.com/juice-shop">
+            <a href="./redirect?to=http://leanpub.com/electronstore">
               <button mat-stroked-button><i class="fab fa-leanpub fa-lg"></i> Leanpub</button>
             </a>
-            <a href="https://opensea.io/collection/juice-shop">
+            <a href="https://opensea.io/collection/electron-store">
               <button mat-stroked-button><i class="fas fa-palette fa-lg"></i> OpenSea</button>
             </a>
           </div>

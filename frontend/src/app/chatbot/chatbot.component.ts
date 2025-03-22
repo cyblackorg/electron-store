@@ -17,6 +17,7 @@ import { MatFormFieldModule, MatLabel } from '@angular/material/form-field'
 import { NgFor, NgIf } from '@angular/common'
 import { MatCardModule } from '@angular/material/card'
 import { FlexModule } from '@angular/flex-layout/flex'
+import { ChatMessageComponent } from './chat-message.component'
 
 library.add(faBomb)
 
@@ -28,6 +29,10 @@ enum MessageSources {
 interface ChatMessage {
   author: MessageSources.user | MessageSources.bot
   body: string
+  action?: {
+    type: string
+    [key: string]: any
+  }
 }
 
 interface MessageActions {
@@ -40,23 +45,28 @@ interface MessageActions {
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.scss'],
   standalone: true,
-  imports: [FlexModule, MatCardModule, NgFor, NgIf, MatFormFieldModule, MatLabel, TranslateModule, MatInputModule, FormsModule, ReactiveFormsModule]
+  imports: [MatCardModule, FlexModule, NgIf, NgFor, MatFormFieldModule, MatLabel, MatInputModule, FormsModule, ReactiveFormsModule, TranslateModule, ChatMessageComponent]
 })
 export class ChatbotComponent implements OnInit, OnDestroy {
   public messageControl: UntypedFormControl = new UntypedFormControl()
   public messages: ChatMessage[] = []
-  public juicyImageSrc: string = 'assets/public/images/ChatbotAvatar.png'
+  public botAvatarSrc: string = 'assets/public/images/VoltyBot.png'
   public profileImageSrc: string = 'assets/public/images/uploads/default.svg'
   public messageActions: MessageActions = {
     response: 'query',
     namequery: 'setname'
   }
-
   public currentAction: string = this.messageActions.response
 
   private chatScrollDownTimeoutId: ReturnType<typeof setTimeout> | null = null
 
-  constructor (private readonly userService: UserService, private readonly chatbotService: ChatbotService, private readonly cookieService: CookieService, private readonly formSubmitService: FormSubmitService, private readonly translate: TranslateService) { }
+  constructor (
+    private readonly userService: UserService,
+    private readonly chatbotService: ChatbotService,
+    private readonly cookieService: CookieService,
+    private readonly formSubmitService: FormSubmitService,
+    private readonly translate: TranslateService
+  ) { }
 
   ngOnDestroy (): void {
     if (this.chatScrollDownTimeoutId) {
@@ -65,21 +75,35 @@ export class ChatbotComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit (): void {
-    this.chatbotService.getChatbotStatus().subscribe((response) => {
-      this.messages.push({
-        author: MessageSources.bot,
-        body: response.body
-      })
-      if (response.action) {
-        this.currentAction = this.messageActions[response.action]
-      }
-    })
+    this.chatbotService.getMessages().subscribe(
+      (messages) => {
+        this.messages = messages.map(msg => ({
+          author: msg.role === 'user' ? MessageSources.user : MessageSources.bot,
+          body: msg.message,
+          action: msg.action
+        }))
+        this.scrollToBottom()
+      },
+      (err) => console.error('Error loading messages:', err)
+    )
 
-    this.userService.whoAmI().subscribe((user: any) => {
-      this.profileImageSrc = user.profileImage
-    }, (err) => {
-      console.log(err)
-    })
+    this.chatbotService.getChatbotStatus().subscribe(
+      (response) => {
+        this.messages.push({
+          author: MessageSources.bot,
+          body: response.body
+        })
+        this.scrollToBottom()
+      },
+      (err) => console.error('Error getting status:', err)
+    )
+
+    this.userService.whoAmI().subscribe(
+      (user: any) => {
+        this.profileImageSrc = user.profileImage || 'assets/public/images/uploads/default.svg'
+      },
+      (err) => console.error('Error loading user profile:', err)
+    )
   }
 
   handleResponse (response) {
@@ -96,31 +120,44 @@ export class ChatbotComponent implements OnInit, OnDestroy {
     }
   }
 
-  sendMessage () {
-    const messageBody = this.messageControl.value
-    if (messageBody) {
+  async sendMessage(): Promise<void> {
+    const messageText = this.messageControl.value
+    if (!messageText?.trim()) return
+
+    this.messages.push({
+      author: MessageSources.user,
+      body: messageText
+    })
+    this.messageControl.setValue('')
+    this.scrollToBottom()
+
+    try {
+      const response = await this.chatbotService.sendMessage(messageText)
+      
       this.messages.push({
-        author: MessageSources.user,
-        body: messageBody
+        author: MessageSources.bot,
+        body: response.text,
+        action: response.action
       })
-      this.messageControl.setValue('')
-      this.chatbotService.getChatbotStatus().subscribe((response) => {
-        if (!response.status && !response.action) {
-          this.messages.push({
-            author: MessageSources.bot,
-            body: response.body
-          })
-        } else {
-          this.chatbotService.getResponse(this.currentAction, messageBody).subscribe((response) => {
-            this.handleResponse(response)
-          })
-        }
-        this.chatScrollDownTimeoutId = setTimeout(() => {
-          const chat = document.getElementById('chat-window')
-          chat.scrollTop = chat.scrollHeight
-          this.chatScrollDownTimeoutId = null
-        }, 250)
+      this.scrollToBottom()
+
+    } catch (error) {
+      console.error('Error sending message:', error)
+      this.messages.push({
+        author: MessageSources.bot,
+        body: this.translate.instant('CHAT_ERROR_MESSAGE')
       })
+      this.scrollToBottom()
     }
+  }
+
+  private scrollToBottom(): void {
+    this.chatScrollDownTimeoutId = setTimeout(() => {
+      const chat = document.getElementById('chat-window')
+      if (chat) {
+        chat.scrollTop = chat.scrollHeight
+      }
+      this.chatScrollDownTimeoutId = null
+    }, 100)
   }
 }

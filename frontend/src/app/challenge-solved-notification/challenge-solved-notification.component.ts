@@ -103,20 +103,8 @@ export class ChallengeSolvedNotificationComponent implements OnInit {
   }
 
   showNotification (challenge: ChallengeSolvedMessage) {
-    this.translate.get('CHALLENGE_SOLVED', { challenge: challenge.challenge }).toPromise().then((challengeSolved) => challengeSolved,
-      (translationId) => translationId).then((message) => {
-      let country
-      if (this.showCtfCountryDetailsInNotifications && this.showCtfCountryDetailsInNotifications !== 'none') {
-        country = this.countryMap[challenge.key]
-      }
-      this.notifications.push({
-        message,
-        flag: challenge.flag,
-        country,
-        copied: false
-      })
-      this.ref.detectChanges()
-    })
+    // No-op: Notifications disabled
+    return
   }
 
   saveProgress () {

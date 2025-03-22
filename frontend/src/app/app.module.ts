@@ -8,6 +8,7 @@ import { type HttpClient } from '@angular/common/http'
 import { OverlayContainer } from '@angular/cdk/overlay'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { ConfigurationService } from './Services/configuration.service'
+import { ChatMessageComponent } from './chatbot/chat-message.component'
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -126,7 +127,8 @@ export function HttpLoaderFactory (http: HttpClient) {
     CodeSnippetComponent,
     CodeAreaComponent,
     CodeFixesComponent,
-    MatSearchBarComponent
+    MatSearchBarComponent,
+    ChatMessageComponent
 ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [

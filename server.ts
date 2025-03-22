@@ -126,6 +126,7 @@ const delivery = require('./routes/delivery')
 const deluxe = require('./routes/deluxe')
 const memory = require('./routes/memory')
 const chatbot = require('./routes/chatbot')
+const llm = require('./routes/llm')
 const locales = require('./data/static/locales.json')
 const i18n = require('i18n')
 const antiCheat = require('./lib/antiCheat')
@@ -574,6 +575,21 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.put('/rest/basket/:id/coupon/:coupon', coupon())
   app.get('/rest/admin/application-version', appVersion())
   app.get('/rest/admin/application-configuration', appConfiguration())
+
+  /* LLM API endpoints - moved before Angular routes */
+  app.post('/rest/llm/classify', security.isAuthorized(), llm.classify())
+  app.post('/rest/llm/parse', security.isAuthorized(), llm.parse())
+  app.post('/rest/llm/generate', security.isAuthorized(), llm.generate())
+  app.post('/rest/llm/sql', security.isAuthorized(), llm.generateSQL())
+
+  /* Chatbot endpoints */
+  app.get('/rest/chatbot/status', chatbot.status())
+  app.post('/rest/chatbot/respond', security.isAuthorized(), chatbot.respond())
+  app.post('/rest/chatbot/messages', security.isAuthorized(), chatbot.saveMessage())
+  app.get('/rest/chatbot/messages', security.isAuthorized(), chatbot.getMessages())
+  app.delete('/rest/chatbot/messages', security.isAuthorized(), chatbot.clearHistory())
+  app.post('/rest/chatbot/execute-sql', security.isAuthorized(), chatbot.executeSQL())
+
   app.get('/rest/repeat-notification', repeatNotification())
   app.get('/rest/continue-code', continueCode.continueCode())
   app.get('/rest/continue-code-findIt', continueCode.continueCodeFindIt())
@@ -598,50 +614,28 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.get('/rest/deluxe-membership', deluxe.deluxeMembershipStatus())
   app.post('/rest/deluxe-membership', security.appendUserId(), deluxe.upgradeToDeluxe())
   app.get('/rest/memories', memory.getMemories())
-  app.get('/rest/chatbot/status', chatbot.status())
-  app.post('/rest/chatbot/respond', chatbot.process())
-  /* NoSQL API endpoints */
-  app.get('/rest/products/:id/reviews', showProductReviews())
-  app.put('/rest/products/:id/reviews', createProductReviews())
-  app.patch('/rest/products/reviews', security.isAuthorized(), updateProductReviews())
-  app.post('/rest/products/reviews', security.isAuthorized(), likeProductReviews())
-
-  /* Web3 API endpoints */
-  app.post('/rest/web3/submitKey', checkKeys.checkKeys())
+  app.get('/rest/web3/submitKey', checkKeys.checkKeys())
   app.get('/rest/web3/nftUnlocked', checkKeys.nftUnlocked())
   app.get('/rest/web3/nftMintListen', nftMint.nftMintListener())
   app.post('/rest/web3/walletNFTVerify', nftMint.walletNFTVerify())
   app.post('/rest/web3/walletExploitAddress', web3Wallet.contractExploitListener())
-
-  /* B2B Order API */
   app.post('/b2b/v2/orders', b2bOrder())
-
-  /* File Serving */
   app.get('/the/devs/are/so/funny/they/hid/an/easter/egg/within/the/easter/egg', easterEgg())
   app.get('/this/page/is/hidden/behind/an/incredibly/high/paywall/that/could/only/be/unlocked/by/sending/1btc/to/us', premiumReward())
   app.get('/we/may/also/instruct/you/to/refuse/all/reasonably/necessary/responsibility', privacyPolicyProof())
-
-  /* Route for dataerasure page */
   app.use('/dataerasure', dataErasure)
-
-  /* Route for redirects */
   app.get('/redirect', redirect())
-
-  /* Routes for promotion video page */
   app.get('/promotion', videoHandler.promotionVideo())
   app.get('/video', videoHandler.getVideo())
-
-  /* Routes for profile page */
   app.get('/profile', security.updateAuthenticatedUsers(), userProfile())
   app.post('/profile', updateUserProfile())
-
-  /* Route for vulnerable code snippets */
   app.get('/snippets', vulnCodeSnippet.serveChallengesWithCodeSnippet())
   app.get('/snippets/:challenge', vulnCodeSnippet.serveCodeSnippet())
   app.post('/snippets/verdict', vulnCodeSnippet.checkVulnLines())
   app.get('/snippets/fixes/:key', vulnCodeFixes.serveCodeFixes())
   app.post('/snippets/fixes', vulnCodeFixes.checkCorrectFix())
 
+  /* Angular route handler - should be after API routes */
   app.use(angular())
 
   /* Error Handling */

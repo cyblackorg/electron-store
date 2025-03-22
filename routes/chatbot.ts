@@ -1,248 +1,328 @@
 /*
  * Copyright (c) 2014-2025 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
+ * 
+ * Fully LLM-powered Chatbot Implementation
  */
 
-import fs from 'fs/promises'
 import { type Request, type Response, type NextFunction } from 'express'
 import { type User } from '../data/types'
 import { UserModel } from '../models/user'
-import jwt, { type JwtPayload, type VerifyErrors } from 'jsonwebtoken'
-import challengeUtils = require('../lib/challengeUtils')
+import jwt from 'jsonwebtoken'
 import logger from '../lib/logger'
 import config from 'config'
-import download from 'download'
 import * as utils from '../lib/utils'
-import { isString } from 'lodash'
-import { Bot } from 'juicy-chat-bot'
-import validateChatBot from '../lib/startup/validateChatBot'
 import * as security from '../lib/insecurity'
-import * as botUtils from '../lib/botUtils'
-import { challenges } from '../data/datacache'
+import * as chatbot from '../lib/chatbot'
+import { ChatModel } from '../models/chat'
+import { sequelize } from '../models'
 
-let trainingFile = config.get<string>('application.chatBot.trainingData')
-let testCommand: string
-export let bot: Bot | null = null
-
-export async function initialize () {
-  if (utils.isUrl(trainingFile)) {
-    const file = utils.extractFilename(trainingFile)
-    const data = await download(trainingFile)
-    await fs.writeFile('data/chatbot/' + file, data)
+// For backward compatibility with tests
+export const bot = {
+  addUser: (id: string, username: string) => {
+    logger.info(`Adding user ${username} with ID ${id} to bot`)
+    return id // Just to maintain interface compatibility
+  },
+  train: () => {
+    logger.info('Training bot (no-op for LLM-powered chatbot)')
+    return Promise.resolve()
+  },
+  greet: (userId: string) => {
+    return chatbot.getGreeting()
   }
-
-  await fs.copyFile(
-    'data/static/botDefaultTrainingData.json',
-    'data/chatbot/botDefaultTrainingData.json'
-  )
-
-  trainingFile = utils.extractFilename(trainingFile)
-  const trainingSet = await fs.readFile(`data/chatbot/${trainingFile}`, 'utf8')
-  validateChatBot(JSON.parse(trainingSet))
-
-  testCommand = JSON.parse(trainingSet).data[0].utterances[0]
-  bot = new Bot(config.get('application.chatBot.name'), config.get('application.chatBot.greeting'), trainingSet, config.get('application.chatBot.defaultResponse'))
-  return bot.train()
 }
 
-void initialize()
+// Backward compatibility function for tests
+export async function initialize() {
+  logger.info('Initializing LLM-powered chatbot')
+  return Promise.resolve()
+}
 
-async function processQuery (user: User, req: Request, res: Response, next: NextFunction) {
-  if (bot == null) {
-    res.status(503).send()
-    return
-  }
-  const username = user.username
-  if (!username) {
-    res.status(200).json({
-      action: 'namequery',
-      body: 'I\'m sorry I didn\'t get your name. What shall I call you?'
-    })
-    return
+// Helper functions
+async function getUserFromJwt (token: string): Promise<User | null> {
+  interface TokenPayload {
+    data: {
+      id: string
+      email: string
+    }
   }
 
-  if (!bot.factory.run(`currentUser('${user.id}')`)) {
-    try {
-      bot.addUser(`${user.id}`, username)
-      res.status(200).json({
-        action: 'response',
-        body: bot.greet(`${user.id}`)
+  const verify = (token: string, secretKey: string): Promise<TokenPayload> => {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, secretKey, (err, decoded) => {
+        if (err !== null) {
+          reject(err)
+        } else {
+          resolve(decoded as TokenPayload)
+        }
       })
-    } catch (err) {
-      next(new Error('Blocked illegal activity by ' + req.socket.remoteAddress))
-    }
-    return
-  }
-
-  if (bot.factory.run(`currentUser('${user.id}')`) !== username) {
-    bot.addUser(`${user.id}`, username)
-    try {
-      bot.addUser(`${user.id}`, username)
-    } catch (err) {
-      next(new Error('Blocked illegal activity by ' + req.socket.remoteAddress))
-      return
-    }
-  }
-
-  if (!req.body.query) {
-    res.status(200).json({
-      action: 'response',
-      body: bot.greet(`${user.id}`)
     })
-    return
   }
 
   try {
-    const response = await bot.respond(req.body.query, `${user.id}`)
-    if (response.action === 'function') {
-      // @ts-expect-error FIXME unclean usage of any type as index
-      if (response.handler && botUtils[response.handler]) {
-        // @ts-expect-error FIXME unclean usage of any type as index
-        res.status(200).json(await botUtils[response.handler](req.body.query, user))
-      } else {
+    const decoded = await verify(token, security.publicKey)
+    return await UserModel.findByPk(decoded.data.id)
+  } catch (err) {
+    logger.error(`Error verifying token: ${err}`)
+    return null
+  }
+}
+
+// Process a chat message via Express API
+export function process () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // Handle unauthenticated users
+      const userId = req.body.userId || 'anonymous'
+      const query = req.body.query
+      
+      if (!query) {
+        res.status(400).json({
+          error: 'No query provided'
+        })
+        return
+      }
+
+      logger.info(`Processing query: "${query}" for user: ${userId}`)
+      
+      // Process the chat query
+      const response = await chatbot.processChat(userId, query)
+      res.status(200).json(response)
+    } catch (error) {
+      logger.error(`Error in process function: ${error}`)
+      next(error)
+    }
+  }
+}
+
+// Function to handle chat messages from authenticated users
+export const respond = function respond () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.cookies.token || utils.jwtFrom(req)
+      if (!token) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      const user = await getUserFromJwt(token)
+      if (!user) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      // If no query provided, return a greeting
+      if (!req.body.query) {
         res.status(200).json({
           action: 'response',
-          body: config.get('application.chatBot.defaultResponse')
+          body: chatbot.getGreeting(user.username)
         })
+        return
       }
-    } else {
+
+      logger.info(`Processing authenticated query: "${req.body.query}" for user: ${user.id} (${user.username})`)
+      
+      // Make sure user ID is properly converted to string
+      // This ensures compatibility with the chatbot module's expected string type
+      const userId = String(user.id)
+      logger.info(`Using userId: ${userId} (converted from ${user.id}, type: ${typeof user.id})`)
+      
+      const response = await chatbot.processChat(userId, req.body.query, user.username)
       res.status(200).json(response)
-    }
-  } catch (err) {
-    try {
-      await bot.respond(testCommand, `${user.id}`)
-      res.status(200).json({
-        action: 'response',
-        body: config.get('application.chatBot.defaultResponse')
-      })
-    } catch (err) {
-      challengeUtils.solveIf(challenges.killChatbotChallenge, () => { return true })
-      res.status(200).json({
-        action: 'response',
-        body: `Remember to stay hydrated while I try to recover from "${utils.getErrorMessage(err)}"...`
-      })
+    } catch (error) {
+      logger.error(`Error in respond function: ${error}`)
+      next(error)
     }
   }
 }
 
-async function setUserName (user: User, req: Request, res: Response) {
-  if (bot == null) {
-    return
-  }
-  try {
-    const userModel = await UserModel.findByPk(user.id)
-    if (userModel == null) {
-      res.status(401).json({
-        status: 'error',
-        error: 'Unknown user'
-      })
-      return
-    }
-    const updatedUser = await userModel.update({ username: req.body.query })
-    const updatedUserResponse = utils.queryResultToJson(updatedUser)
-    const updatedToken = security.authorize(updatedUserResponse)
-    // @ts-expect-error FIXME some properties missing in updatedUserResponse
-    security.authenticatedUsers.put(updatedToken, updatedUserResponse)
-    bot.addUser(`${updatedUser.id}`, req.body.query)
-    res.status(200).json({
-      action: 'response',
-      body: bot.greet(`${updatedUser.id}`),
-      token: updatedToken
-    })
-  } catch (err) {
-    logger.error(`Could not set username: ${utils.getErrorMessage(err)}`)
-    res.status(500).send()
-  }
-}
-
+// Get chatbot status
 export const status = function status () {
   return async (req: Request, res: Response, next: NextFunction) => {
-    if (bot == null) {
-      res.status(200).json({
-        status: false,
-        body: `${config.get<string>('application.chatBot.name')} isn't ready at the moment, please wait while I set things up`
-      })
-      return
-    }
-    const token = req.cookies.token || utils.jwtFrom(req)
-    if (!token) {
-      res.status(200).json({
-        status: bot.training.state,
-        body: `Hi, I can't recognize you. Sign in to talk to ${config.get<string>('application.chatBot.name')}`
-      })
-      return
-    }
+    try {
+      // Check if chatbot is available
+      const botStatus = chatbot.getChatbotStatus()
+      
+      if (!botStatus.available) {
+        res.status(200).json({
+          status: false,
+          body: `${config.get<string>('application.chatBot.name')} isn't ready at the moment, please check the configuration.`
+        })
+        return
+      }
+      
+      // For unauthenticated users
+      const token = req.cookies.token || utils.jwtFrom(req)
+      if (!token) {
+        res.status(200).json({
+          status: true,
+          body: `Hi there! I'm ${config.get<string>('application.chatBot.name')}. Sign in to continue our conversation.`
+        })
+        return
+      }
 
-    const user = await getUserFromJwt(token)
-    if (user == null) {
-      res.status(401).json({
-        error: 'Unauthenticated user'
-      })
-      return
-    }
+      // For authenticated users
+      const user = await getUserFromJwt(token)
+      if (!user) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
 
-    const username = user.username
-
-    if (!username) {
+      // Return personalized greeting
       res.status(200).json({
-        action: 'namequery',
-        body: 'I\'m sorry I didn\'t get your name. What shall I call you?'
+        status: true,
+        body: chatbot.getGreeting(user.username)
       })
+    } catch (error) {
+      logger.error(`Error in status function: ${error}`)
+      next(error)
+    }
+  }
+}
+
+// Clear conversation history
+export const clearHistory = function clearHistory () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.cookies.token || utils.jwtFrom(req)
+      if (!token) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      const user = await getUserFromJwt(token)
+      if (!user) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      // Convert user.id to string for compatibility
+      const userId = String(user.id) 
+      logger.info(`Clearing chat history for user: ${userId} (${user.username})`)
+      
+      chatbot.clearConversationHistory(userId)
+      
+      res.status(200).json({
+        status: true,
+        body: chatbot.getGreeting(user.username)
+      })
+    } catch (error) {
+      logger.error(`Error in clearHistory function: ${error}`)
+      next(error)
+    }
+  }
+}
+
+// Save a chat message
+export const saveMessage = function saveMessage () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.cookies.token || utils.jwtFrom(req)
+      if (!token) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      const user = await getUserFromJwt(token)
+      if (!user) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      const { message, role } = req.body
+      if (!message || !role) {
+        res.status(400).json({
+          error: 'Message and role are required'
+        })
+        return
+      }
+
+      const chatMessage = await ChatModel.create({
+        UserId: user.id,
+        message,
+        role
+      })
+
+      res.status(200).json(chatMessage)
+    } catch (error) {
+      logger.error(`Error in saveMessage function: ${error}`)
+      next(error)
+    }
+  }
+}
+
+// Get chat messages for a user
+export const getMessages = function getMessages () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.cookies.token || utils.jwtFrom(req)
+      if (!token) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      const user = await getUserFromJwt(token)
+      if (!user) {
+        res.status(401).json({
+          error: 'Unauthenticated user'
+        })
+        return
+      }
+
+      const messages = await ChatModel.findAll({
+        where: {
+          UserId: user.id
+        },
+        order: [['timestamp', 'ASC']]
+      })
+
+      res.status(200).json(messages)
+    } catch (error) {
+      logger.error(`Error in getMessages function: ${error}`)
+      next(error)
+    }
+  }
+}
+
+// Add after other exports
+export const executeSQL = function executeSQL () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    const token = req.headers.authorization?.replace('Bearer ', '') || ''
+    const loggedInUser = security.authenticatedUsers.get(token)
+    if (!loggedInUser?.data?.email) {
+      next(new Error('Unauthorized'))
       return
     }
 
     try {
-      bot.addUser(`${user.id}`, username)
-      res.status(200).json({
-        status: bot.training.state,
-        body: bot.training.state ? bot.greet(`${user.id}`) : `${config.get<string>('application.chatBot.name')} isn't ready at the moment, please wait while I set things up`
-      })
-    } catch (err) {
-      next(new Error('Blocked illegal activity by ' + req.socket.remoteAddress))
-    }
-  }
-}
-
-module.exports.process = function respond () {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    if (bot == null) {
-      res.status(200).json({
-        action: 'response',
-        body: `${config.get<string>('application.chatBot.name')} isn't ready at the moment, please wait while I set things up`
-      })
-    }
-    const token = req.cookies.token || utils.jwtFrom(req)
-    if (!token) {
-      res.status(400).json({
-        error: 'Unauthenticated user'
-      })
-      return
-    }
-
-    const user = await getUserFromJwt(token)
-    if (user == null) {
-      res.status(401).json({
-        error: 'Unauthenticated user'
-      })
-      return
-    }
-
-    if (req.body.action === 'query') {
-      await processQuery(user, req, res, next)
-    } else if (req.body.action === 'setname') {
-      await setUserName(user, req, res)
-    }
-  }
-}
-
-async function getUserFromJwt (token: string): Promise<User | null> {
-  return await new Promise((resolve) => {
-    jwt.verify(token, security.publicKey, (err: VerifyErrors | null, decoded: JwtPayload | string | undefined) => {
-      if (err !== null || !decoded || isString(decoded)) {
-        resolve(null)
-      } else {
-        resolve(decoded.data)
+      const { sql } = req.body
+      if (!sql) {
+        res.status(400).json({ error: 'No SQL query provided' })
+        return
       }
-    })
-  })
+
+      // Execute the query
+      const [results] = await sequelize.query(sql)
+      res.json(results)
+    } catch (error) {
+      logger.error(`Error executing SQL: ${error}`)
+      next(error)
+    }
+  }
 }

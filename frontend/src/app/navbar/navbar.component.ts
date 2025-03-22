@@ -65,12 +65,13 @@ library.add(faLanguage, faSearch, faSignInAlt, faSignOutAlt, faComment, faBomb, 
 })
 export class NavbarComponent implements OnInit {
   public userEmail: string = ''
-  public languages: any = []
+  public languages: any[] = []
   public selectedLanguage: string = 'placeholder'
   public version: string = ''
-  public applicationName: string = 'OWASP Juice Shop'
+  public applicationName: string = 'Electron Store'
   public showGitHubLink: boolean = true
-  public logoSrc: string = 'assets/public/images/JuiceShop_Logo.png'
+  public gitHubRibbon: string = 'orange'
+  public logoSrc: string = 'assets/public/images/ElectronStore_Logo.jpeg'
   public scoreBoardVisible: boolean = false
   public shortKeyLang: string = 'placeholder'
   public itemTotal = 0
@@ -139,13 +140,16 @@ export class NavbarComponent implements OnInit {
   checkLanguage () {
     if (this.cookieService.get('language')) {
       const langKey = this.cookieService.get('language')
-      this.translate.use(langKey)
-      this.selectedLanguage = this.languages.find((y: { key: string }) => y.key === langKey)
-      this.shortKeyLang = this.languages.find((y: { key: string }) => y.key === langKey).shortKey
+      if (langKey) {
+        this.translate.use(langKey)
+        this.selectedLanguage = this.languages.find((y: { key: string }) => y.key === langKey)
+        const foundLang = this.languages.find((y: { key: string }) => y.key === langKey)
+        if (foundLang && foundLang.shortKey) {
+          this.shortKeyLang = foundLang.shortKey
+        }
+      }
     } else {
       this.changeLanguage('en')
-      this.selectedLanguage = this.languages.find((y: { key: string }) => y.key === 'en')
-      this.shortKeyLang = this.languages.find((y: { key: string }) => y.key === 'en').shortKey
     }
   }
 
@@ -221,8 +225,8 @@ export class NavbarComponent implements OnInit {
   noop () { }
 
   getLanguages () {
-    this.langService.getLanguages().subscribe((res) => {
-      this.languages = res
+    this.langService.getLanguages().subscribe((res: any) => {
+      this.languages = res as any[]
       this.checkLanguage()
     })
   }

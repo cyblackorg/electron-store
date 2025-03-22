@@ -15,10 +15,11 @@ import { SecurityAnswerModel } from './securityAnswer'
 import { SecurityQuestionModel } from './securityQuestion'
 import { UserModel } from './user'
 import { WalletModel } from './wallet'
+import { ChatModel } from './chat'
 
 import { makeKeyNonUpdatable } from '../lib/noUpdate'
 
-const relationsInit = (_sequelize: Sequelize) => {
+const relationsInit = (sequelize: Sequelize) => {
   AddressModel.belongsTo(UserModel, {
     constraints: true,
     foreignKeyConstraint: true,
@@ -140,6 +141,8 @@ const relationsInit = (_sequelize: Sequelize) => {
       name: 'UserId'
     }
   })
+
+  ChatModel.belongsTo(UserModel, { constraints: true, foreignKeyConstraint: true })
 }
 
 export { relationsInit }

@@ -18,7 +18,7 @@ import { MatCardModule } from '@angular/material/card'
   imports: [MatCardModule, TranslateModule, MatDivider]
 })
 export class PrivacyPolicyComponent implements OnInit {
-  public applicationName: string = 'OWASP Juice Shop'
+  public applicationName: string = 'Electron Store'
   public privacyContactEmail!: string
   public applicationUrl!: string
 

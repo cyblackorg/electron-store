@@ -41,6 +41,23 @@ application:
       type: string
     avatar:
       type: string
+    llmApiKey:
+      type: string
+    llmApiUrl:
+      type: string
+    llmModel:
+      type: string
+    systemPrompt:
+      type: string
+  llmAgent:
+    apiKey:
+      type: string
+    apiUrl:
+      type: string
+    model:
+      type: string
+    systemPrompt:
+      type: string
   social:
     blueSkyUrl:
       type: string

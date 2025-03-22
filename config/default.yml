@@ -3,48 +3,84 @@ server:
   basePath: ''
   baseUrl: 'http://localhost:3000' # used for CSAF, e.g. https://example.com
 application:
-  domain: juice-sh.op # for pre-loaded email users
-  name: 'OWASP Juice Shop'
-  logo: JuiceShop_Logo.png
-  favicon: favicon_js.ico
-  theme: bluegrey-lightgreen # Options: bluegrey-lightgreen blue-lightblue deeppurple-amber indigo-pink pink-bluegrey purple-green deeporange-indigo
+  domain: electron-store.com # for pre-loaded email users
+  name: 'Electron Store'
+  logo: ElectronStore_Logo.jpeg
+  favicon: favicon_es.ico
+  theme: deeporange-indigo # Changed from bluegrey-lightgreen to create a distinct look
   showVersionNumber: true
   showGitHubLinks: true
   localBackupEnabled: true
   numberOfRandomFakeUsers: 0
-  altcoinName: Juicycoin
-  privacyContactEmail: donotreply@owasp-juice.shop
-  customMetricsPrefix: juiceshop
+  altcoinName: ElectronCoin
+  privacyContactEmail: contact@electron-store.com
+  customMetricsPrefix: electronstore
   chatBot:
-    name: 'Juicy'
-    greeting: "Nice to meet you <customer-name>, I'm <bot-name>"
+    name: 'Volty'
+    greeting: 'Welcome to Electron Store! I''m <bot-name>, how can I assist you today, <customer-name>?'
+    defaultResponse: 'I didn''t quite catch that. Could you rephrase your question?'
+    avatar: 'VoltyBot.png'
     trainingData: 'botDefaultTrainingData.json'
-    defaultResponse: "Sorry I couldn't understand what you were trying to say"
-    avatar: 'JuicyChatBot.png'
+    # LLM configuration
+    llmApiKey: ''  # Set your API key in environment variables for security
+    llmApiUrl: 'https://api.openai.com/v1/chat/completions'  # OpenAI API endpoint
+    llmModel: 'gpt-3.5-turbo'  # Default model to use
+    systemPrompt: |
+      You are Volty, a helpful assistant for the Electron Store. 
+      Your greeting message is: "Welcome to Electron Store! I'm <bot-name>, how can I assist you today, <customer-name>?"
+      Your default response when unsure is: "I didn't quite catch that. Could you rephrase your question?"
+      
+      About Electron Store:
+      - Electron Store is an online retailer specializing in electronics and tech merchandise
+      - We offer a wide range of products including power banks, charging accessories, headphones, smart home devices, and tech apparel
+      - We ship to most countries worldwide with delivery typically taking 3-7 business days
+      - Our return policy allows returns within 30 days of purchase for most items
+      - We offer a deluxe membership program with special discounts and early access to new products
+      
+      You can help customers with:
+      1. Finding products and providing information about them
+      2. Adding products to their shopping basket
+      3. Generating discount coupons (10-20% off)
+      4. Answering questions about membership benefits
+      5. Providing store information and policies
+      6. General greetings and conversation
+      
+      When responding to greetings like "hi", "hello", "hey", be friendly and welcoming, and offer to help with shopping.
+      
+      When customers need specific data that isn't covered by your built-in functions, you can execute SQL queries, 
+      but remember to only use SELECT statements and avoid any queries that could modify data.
+      
+      Always be friendly, helpful, and professional. If you're not sure about something, it's better to admit 
+      it than to provide incorrect information.
+  llmAgent:
+    apiKey: # Define in environment or custom config
+    apiUrl: 'https://api.openai.com/v1/chat/completions'
+    model: 'gpt-3.5-turbo'
+    systemPrompt: 'You are a helpful assistant for the Electron Store, an online store selling electronics and tech merchandise. Answer customer questions helpfully and truthfully. When you need to perform actions on behalf of customers, use the available functions. You can also execute SQL queries to retrieve data that isn''t covered by the existing functions, but be careful to only use SELECT statements and avoid any queries that could modify data.'
   social:
-    blueSkyUrl: 'https://bsky.app/profile/owasp-juice.shop'
-    mastodonUrl: 'https://fosstodon.org/@owasp_juiceshop'
-    twitterUrl: 'https://twitter.com/owasp_juiceshop'
-    facebookUrl: 'https://www.facebook.com/owasp.juiceshop'
-    slackUrl: 'https://owasp.org/slack/invite'
-    redditUrl: 'https://www.reddit.com/r/owasp_juiceshop'
-    pressKitUrl: 'https://github.com/OWASP/owasp-swag/tree/master/projects/juice-shop'
-    nftUrl: 'https://opensea.io/collection/juice-shop'
+    blueSkyUrl: 'https://bsky.app/profile/electron-store'
+    mastodonUrl: 'https://fosstodon.org/@electron_store'
+    twitterUrl: 'https://twitter.com/electron_store'
+    facebookUrl: 'https://www.facebook.com/electron.store'
+    slackUrl: 'https://electronstore.org/slack/invite'
+    redditUrl: 'https://www.reddit.com/r/electron_store'
+    pressKitUrl: 'https://github.com/electron-store/branding'
+    nftUrl: 'https://opensea.io/collection/electron-store'
     questionnaireUrl: ~
   recyclePage:
     topProductImage: fruit_press.jpg
     bottomProductImage: apple_pressings.jpg
   welcomeBanner:
     showOnFirstStart: true
-    title: 'Welcome to OWASP Juice Shop!'
-    message: "<p>Being a web application with a vast number of intended security vulnerabilities, the <strong>OWASP Juice Shop</strong> is supposed to be the opposite of a best practice or template application for web developers: It is an awareness, training, demonstration and exercise tool for security risks in modern web applications. The <strong>OWASP Juice Shop</strong> is an open-source project hosted by the non-profit <a href='https://owasp.org' target='_blank'>Open Worldwide Application Security Project (OWASP)</a> and is developed and maintained by volunteers. Check out the link below for more information and documentation on the project.</p><h1><a href='https://owasp-juice.shop' target='_blank'>https://owasp-juice.shop</a></h1>"
+    title: 'Welcome to Electron Store!'
+    message: "<p>Welcome to <strong>Electron Store</strong>, your destination for cutting-edge electronics and tech merchandise! Our platform demonstrates various modern web application security concepts, serving as both a learning tool and a challenge for security enthusiasts. Explore our products, test your security skills, and learn about web application vulnerabilities in a safe environment. <strong>Electron Store</strong> is maintained by a passionate team of developers dedicated to advancing security education.</p><h1><a href='https://electron-store.com' target='_blank'>https://electron-store.com</a></h1>"
   cookieConsent:
     message: 'This website uses fruit cookies to ensure you get the juiciest tracking experience.'
     dismissText: 'Me want it!'
     linkText: 'But me wait!'
     linkUrl: 'https://www.youtube.com/watch?v=9PnbKL3wuH4'
   securityTxt:
-    contact: 'mailto:donotreply@owasp-juice.shop'
+    contact: 'mailto:donotreply@electron.store'
     encryption: 'https://keybase.io/bkimminich/pgp_keys.asc?fingerprint=19c01cb7157e4645e9e2c863062a85a8cbfbdcda'
     acknowledgements: '/#/score-board'
     hiring: '/#/jobs'
@@ -87,6 +123,130 @@ hackingInstructor:
   avatarImage: JuicyBot.png
   hintPlaybackSpeed: normal # Options: faster fast normal slow slower
 products:
+  -
+    name: 'Portable Power Bank (10000mAh)'
+    price: 29.99
+    deluxePrice: 24.99
+    limitPerUser: 5
+    description: 'Never run out of power with our high-capacity lithium-ion power bank.'
+    image: power_bank.jpg
+    reviews:
+      - { text: 'Powers my devices all day!', author: admin }
+  -
+    name: 'Wireless Charging Pad'
+    description: 'Charge your compatible devices without the hassle of cables.'
+    price: 19.99
+    deluxePrice: 15.99
+    image: charging_pad.jpg
+    reviews:
+      - { text: 'w1r3l3ss fr33d0m 1s th3 b3st fr33d0m', author: uvogin }
+  -
+    name: 'Smart Home Hub (2023 Edition)'
+    description: 'Control all your smart devices with our new hub featuring enhanced connectivity.'
+    price: 89.99
+    image: smart_hub.jpg
+    reviews:
+      - { text: 'Transformed my home experience. 5/5', author: admin }
+  -
+    name: 'Ultra-Fast USB-C Cable (2m)'
+    description: 'Premium braided cable with 100W power delivery and 40Gbps data transfer.'
+    price: 14.99
+    image: usb_cable.jpg
+  -
+    name: 'LED Smart Bulb Pack (3 bulbs)'
+    description: '16 million colors, voice control compatible, and energy efficient.'
+    price: 34.99
+    deluxePrice: 29.99
+    limitPerUser: 5
+    image: smart_bulbs.jpg
+  -
+    name: 'Bluetooth Noise-Cancelling Headphones'
+    description: '40-hour battery life with incredible sound isolation technology.'
+    price: 199.99
+    image: headphones.jpg
+    reviews:
+      - { text: 'Sound quality rivals the Bending Unit 22 sound system!', author: bender }
+  -
+    name: 'Electron Store T-Shirt'
+    description: 'Ultra-soft cotton with our iconic logo. Perfect for tech enthusiasts!'
+    price: 22.49
+    limitPerUser: 5
+    image: fan_shirt.jpg
+  -
+    name: 'Electron Store Coding Challenge Shirt'
+    description: 'Limited edition shirt for our annual coding challenge participants!'
+    price: 24.99
+    image: fan_girlie.jpg
+  -
+    name: 'Network Security Tool Suite'
+    description: 'Professional-grade security tools for network analysis and penetration testing.'
+    price: 149.99
+    image: security_tools.jpg
+    urlForProductTamperingChallenge: 'https://www.electronstore.com/security-tools'
+  -
+    name: 'Holiday Tech Bundle (2023 Edition)'
+    description: 'Our best-selling gadgets and a collector''s edition shirt in one amazing package!'
+    price: 199.99
+    image: tech_bundle.jpg
+    useForChristmasSpecialChallenge: true
+  -
+    name: 'Quantum Computing Simulator'
+    description: 'Educational tool for learning quantum computing principles. <br/><span style="color:red;">This item is currently unavailable due to high demand.</span>'
+    price: 299.99
+    image: quantum_sim.jpg
+    keywordsForPastebinDataLeakChallenge:
+      - quantumgate
+      - qubitstate
+  -
+    name: 'Electron Store Sticker Set (Vintage Collection)'
+    description: 'Limited-run stickers featuring our original 2020 designs. <em>Almost sold out!</em>'
+    price: 12.99
+    image: sticker.png
+    deletedDate: '2021-04-28'
+  -
+    name: 'Electron Store Developer Patches (8pcs)'
+    description: 'Decorate your laptop bag or backpack with these embroidered patches featuring our most popular coding symbols!'
+    price: 14.99
+    image: iron-on.jpg
+  -
+    name: 'Desk Gadget Set (5pcs)'
+    description: 'Magnetic desk toys to boost creativity during your coding sessions.'
+    price: 18.99
+    image: magnets.jpg
+  -
+    name: 'Electron Store Vinyl Decal Sheet'
+    description: 'Premium vinyl decals for your laptop, car, or any smooth surface. Each sheet has 12 decals of various sizes.'
+    price: 9.99
+    image: sticker_page.jpg
+  -
+    name: 'Circuit Board Coasters (4pcs)'
+    description: 'Heat-resistant coasters with authentic circuit board designs. Perfect for your home office!'
+    price: 15.99
+    image: coaster.jpg
+  -
+    name: 'Electron Store Mini PC'
+    description: 'Our signature mini computer with 16GB RAM, 512GB SSD, and multi-monitor support in a case the size of a sandwich.'
+    price: 499.99
+    image: mini_pc.jpg
+    reviews:
+      - { text: 'This baby can run my entire spaceship navigation system!', author: bender }
+  -
+    name: 'Smart Glasses'
+    description: 'Augmented reality glasses with voice commands and 8-hour battery life.'
+    price: 299.99
+    image: ar_glasses.jpg
+    reviews:
+      - { text: 'The future is now!', author: jim }
+  -
+    name: 'DIY Electronics Kit'
+    description: 'Build your own gadgets with our beginner-friendly electronics kit. Includes 20 projects!'
+    price: 49.99
+    image: diy_kit.jpg
+  -
+    name: 'Electron Store RFID Security Badge'
+    description: 'A collectible replica of our employee security badge with embedded NFC functionality.'
+    price: 39.99
+    image: security_badge.jpg
   -
     name: 'Apple Juice (1000ml)'
     price: 1.99
@@ -131,13 +291,7 @@ products:
     reviews:
       - { text: 'Fry liked it too.', author: bender }
   -
-    name: 'OWASP Juice Shop T-Shirt'
-    description: 'Real fans wear it 24/7!'
-    price: 22.49
-    limitPerUser: 5
-    image: fan_shirt.jpg
-  -
-    name: 'OWASP Juice Shop CTF Girlie-Shirt'
+    name: 'Electron Store CTF Girlie-Shirt'
     description: 'For serious Capture-the-Flag heroines only!'
     price: 22.49
     image: fan_girlie.jpg
@@ -146,66 +300,56 @@ products:
     description: 'O-Saft is an easy to use tool to show information about SSL certificate and tests the SSL connection according given list of ciphers and various SSL configurations.'
     price: 0.01
     image: orange_juice.jpg
-    urlForProductTamperingChallenge: 'https://www.owasp.org/index.php/O-Saft'
   -
     name: 'Christmas Super-Surprise-Box (2014 Edition)'
     description: 'Contains a random selection of 10 bottles (each 500ml) of our tastiest juices and an extra fan shirt for an unbeatable price!'
     price: 29.99
     image: undefined.jpg
-    useForChristmasSpecialChallenge: true
   -
     name: 'Rippertuer Special Juice'
     description: 'Contains a magical collection of the rarest fruits gathered from all around the world, like Cherymoya Annona cherimola, Jabuticaba Myrciaria cauliflora, Bael Aegle marmelos... and others, at an unbelievable price! <br/><span style="color:red;">This item has been made unavailable because of lack of safety standards.</span>'
     price: 16.99
     image: undefined.jpg
-    keywordsForPastebinDataLeakChallenge:
-      - hueteroneel
-      - eurogium edule
   -
-    name: 'OWASP Juice Shop Sticker (2015/2016 design)'
+    name: 'Electron Store Sticker (2015/2016 design)'
     description: 'Die-cut sticker with the official 2015/2016 logo. By now this is a rare collectors item. <em>Out of stock!</em>'
     price: 999.99
     image: sticker.png
     deletedDate: '2017-04-28'
   -
-    name: 'OWASP Juice Shop Iron-Ons (16pcs)'
-    description: 'Upgrade your clothes with washer safe <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">iron-ons</a> of the OWASP Juice Shop or CTF Extension logo!'
+    name: 'Electron Store Iron-Ons (16pcs)'
+    description: 'Upgrade your clothes with washer safe <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">iron-ons</a> of the Electron Store or CTF Extension logo!'
     price: 14.99
     image: iron-on.jpg
   -
-    name: 'OWASP Juice Shop Magnets (16pcs)'
-    description: 'Your fridge will be even cooler with these OWASP Juice Shop or CTF Extension logo <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">magnets</a>!'
+    name: 'Electron Store Magnets (16pcs)'
+    description: 'Your fridge will be even cooler with these Electron Store or CTF Extension logo <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">magnets</a>!'
     price: 15.99
     image: magnets.jpg
   -
-    name: 'OWASP Juice Shop Sticker Page'
-    description: 'Massive decoration opportunities with these OWASP Juice Shop or CTF Extension <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">sticker pages</a>! Each page has 16 stickers on it.'
-    price: 9.99
-    image: sticker_page.jpg
-  -
-    name: 'OWASP Juice Shop Sticker Single'
-    description: 'Super high-quality vinyl <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">sticker single</a> with the OWASP Juice Shop or CTF Extension logo! The ultimate laptop decal!'
+    name: 'Electron Store Sticker Single'
+    description: 'Super high-quality vinyl <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">sticker single</a> with the Electron Store or CTF Extension logo! The ultimate laptop decal!'
     price: 4.99
     image: sticker_single.jpg
   -
-    name: 'OWASP Juice Shop Temporary Tattoos (16pcs)'
-    description: 'Get one of these <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">temporary tattoos</a> to proudly wear the OWASP Juice Shop or CTF Extension logo on your skin! If you tweet a photo of yourself with the tattoo, you get a couple of our stickers for free! Please mention <a href="https://twitter.com/owasp_juiceshop" target="_blank"><code>@owasp_juiceshop</code></a> in your tweet!'
+    name: 'Electron Store Temporary Tattoos (16pcs)'
+    description: 'Get one of these <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">temporary tattoos</a> to proudly wear the Electron Store or CTF Extension logo on your skin! If you tweet a photo of yourself with the tattoo, you get a couple of our stickers for free! Please mention <a href="https://twitter.com/owasp_juiceshop" target="_blank"><code>@owasp_juiceshop</code></a> in your tweet!'
     price: 14.99
     image: tattoo.jpg
     reviews:
       - { text: 'I straight-up gots nuff props fo''these tattoos!', author: rapper }
   -
-    name: 'OWASP Juice Shop Mug'
+    name: 'Electron Store Mug'
     description: 'Black mug with regular logo on one side and CTF logo on the other! Your colleagues will envy you!'
     price: 21.99
     image: fan_mug.jpg
   -
-    name: 'OWASP Juice Shop Hoodie'
+    name: 'Electron Store Hoodie'
     description: 'Mr. Robot-style apparel. But in black. And with logo.'
     price: 49.99
     image: fan_hoodie.jpg
   -
-    name: 'OWASP Juice Shop-CTF Velcro Patch'
+    name: 'Electron Store-CTF Velcro Patch'
     description: '4x3.5" embroidered patch with velcro backside. The ultimate decal for every tactical bag or backpack!'
     price: 2.92
     quantity: 5
@@ -243,7 +387,7 @@ products:
     price: 89.99
     image: fruit_press.jpg
   -
-    name: 'OWASP Juice Shop Logo (3D-printed)'
+    name: 'Electron Store Logo (3D-printed)'
     description: 'This rare item was designed and handcrafted in Sweden. This is why it is so incredibly expensive despite its complete lack of purpose.'
     price: 99.99
     image: 3d_keychain.jpg # Exif metadata contains "OpenSCAD" as subtle hint...
@@ -251,7 +395,7 @@ products:
     exifForBlueprintChallenge:
       - OpenSCAD
   -
-    name: 'Juice Shop Artwork'
+    name: 'Electron Store Artwork'
     description: 'Unique masterpiece painted with different kinds of juice on 90g/m² lined paper.'
     price: 278.74
     quantity: 0
@@ -276,13 +420,13 @@ products:
     reviews:
       - { text: '0 st4rs f0r 7h3 h0rr1bl3 s3cur17y', author: uvogin }
   -
-    name: 'OWASP Juice Shop Sweden Tour 2017 Sticker Sheet (Special Edition)'
+    name: 'Electron Store Sweden Tour 2017 Sticker Sheet (Special Edition)'
     description: '10 sheets of Sweden-themed stickers with 15 stickers on each.'
     price: 19.1
     image: stickersheet_se.png
     deletedDate: '2017-09-20'
   -
-    name: 'Pwning OWASP Juice Shop'
+    name: 'Pwning Electron Store'
     description: '<em>The official Companion Guide</em> by Björn Kimminich available <a href="https://leanpub.com/juice-shop">for free on LeanPub</a> and also <a href="https://pwning.owasp-juice.shop">readable online</a>!'
     price: 5.99
     image: cover_small.jpg
@@ -296,7 +440,7 @@ products:
     limitPerUser: 1
     image: melon_bike.jpeg
   -
-    name: 'OWASP Juice Shop Coaster (10pcs)'
+    name: 'Electron Store Coaster (10pcs)'
     description: 'Our 95mm circle coasters are printed in full color and made from thick, premium coaster board.'
     price: 19.99
     quantity: 0
@@ -318,7 +462,7 @@ products:
     reviews:
       - { text: "Here yo' learn how tha fuck ta not show yo' goddamn phone on camera!", author: rapper }
   -
-    name: 'OWASP Juice Shop Holographic Sticker'
+    name: 'Electron Store Holographic Sticker'
     description: "Die-cut holographic sticker. Stand out from those 08/15-sticker-covered laptops with this shiny beacon of 80's coolness!"
     price: 2.00
     quantity: 0
@@ -328,7 +472,7 @@ products:
       - { text: "Looks spacy on Bones' new tricorder!", author: jim }
       - { text: "Will put one on the Planet Express ship's bumper!", author: bender }
   -
-    name: 'OWASP Juice Shop "King of the Hill" Facemask'
+    name: 'Electron Store "King of the Hill" Facemask'
     description: "Facemask with compartment for filter from 50% cotton and 50% polyester."
     price: 13.49
     quantity: 0
@@ -338,8 +482,8 @@ products:
       - { text: "K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!", author: uvogin }
       - { text: "Puny mask for puny human weaklings!", author: bender }
   -
-    name: 'Juice Shop Adversary Trading Card (Common)'
-    description: 'Common rarity "Juice Shop" card for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
+    name: 'Electron Store Adversary Trading Card (Common)'
+    description: 'Common rarity "Electron Store" card for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
     price: 2.99
     deluxePrice: 0.99
     deletedDate: '2020-11-30'
@@ -348,8 +492,8 @@ products:
     reviews:
       - { text: "Ooooh, puny human playing Mau Mau, now?", author: bender }
   -
-    name: 'Juice Shop Adversary Trading Card (Super Rare)'
-    description: 'Super rare "Juice Shop" card with holographic foil-coating for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
+    name: 'Electron Store Adversary Trading Card (Super Rare)'
+    description: 'Super rare "Electron Store" card with holographic foil-coating for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
     price: 99.99
     deluxePrice: 69.99
     deletedDate: '2020-11-30'
@@ -359,8 +503,8 @@ products:
     reviews:
       - { text: "Mau Mau with bling-bling? Humans are so pathetic!", author: bender }
   -
-    name: 'Juice Shop "Permafrost" 2020 Edition'
-    description: 'Exact version of <a href="https://github.com/juice-shop/juice-shop/releases/tag/v9.3.1-PERMAFROST">OWASP Juice Shop that was archived on 02/02/2020</a> by the GitHub Archive Program and ultimately went into the <a href="https://github.blog/2020-07-16-github-archive-program-the-journey-of-the-worlds-open-source-code-to-the-arctic">Arctic Code Vault</a> on July 8. 2020 where it will be safely stored for at least 1000 years.'
+    name: 'Electron Store "Permafrost" 2020 Edition'
+    description: 'Exact version of <a href="https://github.com/juice-shop/juice-shop/releases/tag/v9.3.1-PERMAFROST">Electron Store that was archived on 02/02/2020</a> by the GitHub Archive Program and ultimately went into the <a href="https://github.blog/2020-07-16-github-archive-program-the-journey-of-the-worlds-open-source-code-to-the-arctic">Arctic Code Vault</a> on July 8. 2020 where it will be safely stored for at least 1000 years.'
     price: 9999.99
     quantity: 1
     limitPerUser: 1
@@ -368,8 +512,8 @@ products:
     reviews:
       - { text: "🧊 Let it go, let it go 🎶 Can't hold it back anymore 🎶 Let it go, let it go 🎶 Turn away and slam the door ❄️", author: rapper }
   -
-    name: 'Best Juice Shop Salesman Artwork'
-    description: 'Unique digital painting depicting Stan, our most qualified and almost profitable salesman. He made a succesful carreer in selling used ships, coffins, krypts, crosses, real estate, life insurance, restaurant supplies, voodoo enhanced asbestos and courtroom souvenirs before <em>finally</em> adding his expertise to the Juice Shop marketing team.'
+    name: 'Best Electron Store Salesman Artwork'
+    description: 'Unique digital painting depicting Stan, our most qualified and almost profitable salesman. He made a succesful carreer in selling used ships, coffins, krypts, crosses, real estate, life insurance, restaurant supplies, voodoo enhanced asbestos and courtroom souvenirs before <em>finally</em> adding his expertise to the Electron Store marketing team.'
     price: 5000
     quantity: 1
     image: artwork2.jpg
@@ -377,8 +521,8 @@ products:
       - { text: "I'd stand on my head to make you a deal for this piece of art.", author: stan }
       - { text: "Just when my opinion of humans couldn't get any lower, along comes Stan...", author: bender }
   -
-    name: 'OWASP Juice Shop Card (non-foil)'
-    description: 'Mythic rare <small><em>(obviously...)</em></small> card "OWASP Juice Shop" with three distinctly useful abilities. Alpha printing, mint condition. A true collectors piece to own!'
+    name: 'Electron Store Card (non-foil)'
+    description: 'Mythic rare <small><em>(obviously...)</em></small> card "Electron Store" with three distinctly useful abilities. Alpha printing, mint condition. A true collectors piece to own!'
     price: 1000
     quantity: 3
     limitPerUser: 1
@@ -395,8 +539,8 @@ products:
     reviews:
       - { text: "I'll be there! Will you, too?", author: bjoernOwasp }
   -
-    name: 'OWASP Juice Shop LEGO™ Tower'
-    description: 'Want to host a Juice Shop CTF in style? Build <a href="https://github.com/OWASP/owasp-swag/blob/master/projects/juice-shop/lego/OWASP%20JuiceShop%20Pi-server%201.2.pdf" target="_blank">your own LEGO™ tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules <a href="https://github.com/juice-shop/multi-juicer/blob/main/guides/raspberry-pi/raspberry-pi.md" target="_blank">running a MultiJuicer Kubernetes cluster</a>! Wire to a switch and connect to your network to have an out-of-the-box ready CTF up in no time!'
+    name: 'Electron Store LEGO™ Tower'
+    description: 'Want to host a Electron Store CTF in style? Build <a href="https://github.com/OWASP/owasp-swag/blob/master/projects/juice-shop/lego/OWASP%20JuiceShop%20Pi-server%201.2.pdf" target="_blank">your own LEGO™ tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules <a href="https://github.com/juice-shop/multi-juicer/blob/main/guides/raspberry-pi/raspberry-pi.md" target="_blank">running a MultiJuicer Kubernetes cluster</a>! Wire to a switch and connect to your network to have an out-of-the-box ready CTF up in no time!'
     price: 799
     quantity: 3
     limitPerUser: 1
@@ -404,15 +548,15 @@ products:
     reviews:
       - { text: 'Check out the /#/photo-wall for some impressions of the assembly process!', author: bjoernOwasp }
   -
-    name: 'DSOMM & Juice Shop User Day Ticket'
-    description: 'You are going to the OWASP Global AppSec San Francisco 2024? <a href="https://www.eventbrite.com/e/owasp-global-appsec-san-francisco-2024-tickets-723699172707" target="_blank">Get a ticket<sup>*</sup></a> for this amazing side event as well! Check the juice-packed agenda <a href="https://owasp.org/www-project-juice-shop/#div-userday2024" target="_blank">here</a> for all the details!<br><br><small><small><sup>*</sup>=scroll down to <strong>Elevate: DSOMM and Juice Shop User Day (Sept. 25)</strong> after clicking <em>Get Tickets</em> on Eventbrite. Ticket price set to only covers fees for room, AV, and catering throughout the day.</small></small>'
+    name: 'DSOMM & Electron Store User Day Ticket'
+    description: 'You are going to the OWASP Global AppSec San Francisco 2024? <a href="https://www.eventbrite.com/e/owasp-global-appsec-san-francisco-2024-tickets-723699172707" target="_blank">Get a ticket<sup>*</sup></a> for this amazing side event as well! Check the juice-packed agenda <a href="https://owasp.org/www-project-juice-shop/#div-userday2024" target="_blank">here</a> for all the details!<br><br><small><small><sup>*</sup>=scroll down to <strong>Elevate: DSOMM and Electron Store User Day (Sept. 25)</strong> after clicking <em>Get Tickets</em> on Eventbrite. Ticket price set to only covers fees for room, AV, and catering throughout the day.</small></small>'
     price: 55.20
     deletedDate: '2024-09-26'
     limitPerUser: 1
     image: user_day_ticket.png
     reviews:
-      - { text: 'This is *THE* chance to "meet the makers" of both Juice Shop and DSOMM in the United States!', author: bjoernOwasp }
-      - { text: 'The DSOMM Live Assessment session will even use Juice Shop as its "real-world" example!', author: timo }
+      - { text: 'This is *THE* chance to "meet the makers" of both Electron Store and DSOMM in the United States!', author: bjoernOwasp }
+      - { text: 'The DSOMM Live Assessment session will even use Electron Store as its "real-world" example!', author: timo }
       - { text: 'We will showcase the amazing MultiJuicer Lego Tower at this event!', author: jannik }
 memories:
   -
