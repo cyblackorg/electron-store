@@ -36,6 +36,12 @@ const replace = require('replace')
 const entities = new Entities()
 
 export default async () => {
+  // Check if we should initialize the database
+  if (process.env.INIT_DB !== 'true') {
+    logger.info('Skipping database initialization. Set INIT_DB=true to initialize.')
+    return
+  }
+
   const creators = [
     createSecurityQuestions,
     createUsers,

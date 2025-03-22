@@ -1,6 +1,6 @@
 -
   email: admin
-  password: 'admin123'
+  password: 'admin123#'
   key: admin
   role: 'admin'
   securityQuestion:
@@ -28,7 +28,7 @@
       expYear: 2086
 -
   email: jim
-  password: 'ncc-1701'
+  password: 'ncc-170153'
   key: jim
   role: 'customer'
   walletBalance: 100
@@ -60,7 +60,7 @@
       expYear: 2099
 -
   email: bender
-  password: 'OhG0dPlease1nsertLiquor!'
+  password: 'OhG0dPlease1nsert!'
   key: bender
   role: 'customer'
   securityQuestion:
@@ -85,7 +85,7 @@
 -
   email: bjoern.kimminich@gmail.com
   username: bkimminich
-  password: 'bW9jLmxpYW1nQGhjaW5pbW1pay5ucmVvamI='
+  password: 'bWq344LmxpYW1nQGhjaW5pbW1pay5ucmVvamI='
   customDomain: true
   key: bjoernGoogle
   role: 'admin'
@@ -104,7 +104,7 @@
       expYear: 2092
 -
   email: ciso
-  password: 'mDLx?94T~1CfVfZMzw@sJ9f?s3L6lbMqE70FfI8^54jbNikY5fymx7c!YbJb'
+  password: 'mf234~1CfVfZMzw@sJ9f?s3L6lbMqE70FfI8^54jbNikY5fymx7c!YbJb'
   key: ciso
   role: 'deluxe'
   securityQuestion:
@@ -112,7 +112,7 @@
     answer: 'Brd?j8sEMziOvvBf§Be?jFZ77H?hgm'
 -
   email: support
-  password: 'J6aVjTgOpRs@?5l!Zkq2AYnCE@RF$P'
+  password: '4f2J6aVjTgOpRs@?5l!Zkq2AYnCE@RF$P'
   key: support
   role: 'admin'
   securityQuestion:
@@ -120,7 +120,7 @@
     answer: 'SC OLEA SRL' # http://www.olea.com.ro/
 -
   email: morty
-  password: 'focusOnScienceMorty!focusOnScience'
+  password: '1focusOnScienceMorty!focusOnScience'
   key: morty
   role: 'customer'
   walletBalance: 100
@@ -129,7 +129,7 @@
     answer: '5N0wb41L' # http://rickandmorty.wikia.com/wiki/Snuffles
 -
   email: mc.safesearch
-  password: 'Mr. N00dles'
+  password: 'M3r. N00dles'
   key: rapper
   role: 'customer'
   securityQuestion:
@@ -137,7 +137,7 @@
     answer: 'I even shared my pizza bagels with you!'
 -
   email: J12934
-  password: '0Y8rMnww$*9VFYE§59-!Fg1L6t&6lB'
+  password: '10Y8rMnww$*9VFYE§59-!Fg1L6t&6lB'
   key: jannik
   role: 'admin'
   securityQuestion:
@@ -146,7 +146,7 @@
 -
   email: wurstbrot
   username: wurstbrot
-  password: 'EinBelegtesBrotMitSchinkenSCHINKEN!'
+  password: '23EinBelegtesBrotMitSchinkenSCHINKEN!'
   totpSecret: IFTXE3SPOEYVURT2MRYGI52TKJ4HC3KH
   key: timo
   role: 'admin'
@@ -155,7 +155,7 @@
     answer: 'NZMJLjEinU7TFElDIYW8'
 -
   email: amy
-  password: 'K1f.....................'
+  password: '42K1f.....................'
   key: amy
   role: 'customer'
   securityQuestion:
@@ -163,7 +163,7 @@
     answer: 'Dr. Dr. Dr. Dr. Zoidberg'
 -
   email: bjoern
-  password: 'monkey summer birthday are all bad passwords but work just fine in a long passphrase'
+  password: '123monkey summer birthday are all bad passwords but work just fine in a long passphrase'
   key: bjoern
   profileImage: '12.png'
   role: 'admin'
@@ -173,7 +173,7 @@
     answer: 'West-2082' # http://www.alte-postleitzahlen.de/uetersen
 -
   email: bjoern@owasp.org
-  password: 'kitten lesser pooch karate buffoon indoors'
+  password: '23kitten lesser pooch karate buffoon indoors'
   customDomain: true
   key: bjoernOwasp
   role: 'deluxe'
@@ -183,7 +183,7 @@
     answer: 'Zaya' # https://www.youtube.com/watch?v=Lu0-kDdtVf4
 -
   email: chris.pike
-  password: 'uss enterprise'
+  password: '2342uss enterprise'
   key: chris
   role: 'customer'
   deletedFlag: true
@@ -192,7 +192,7 @@
     answer: 'greenwood'
 -
   email: accountant
-  password: 'i am an awesome accountant'
+  password: '24i am an awesome accountant'
   key: accountant
   role: 'accounting'
   lastLoginIp: '123.456.789'
@@ -201,7 +201,7 @@
     answer: 'sdAffsdfrefrbgreq3423'
 -
   email: uvogin
-  password: 'muda-muda > ora-ora' # https://www.youtube.com/watch?v=vnJv8IoLMwc
+  password: '1muda-muda > ora-ora' # https://www.youtube.com/watch?v=vnJv8IoLMwc
   key: uvogin
   role: 'customer'
   walletBalance: 100
@@ -233,20 +233,20 @@
       expYear: 2099
 -
   email: john
-  username: j0hNny
+  username: j0hNny1yosaku
   password: 'y&x5Z#f6W532Z4445#Ae2HkwZVyDb7&oCUaDzFU'
   key: john
   role: 'customer'
 -
   email: emma
   username: E=ma²
-  password: 'y&x5Z#f6W532ZUf$q3DsdgfgfgxxUsvoCUaDzFU'
+  password: '131y&x5Z#f6W532ZUf$q3DsdgfgfgxxUsvoCUaDzFU'
   key: emma
   role: 'customer'
 -
   email: stan
   username: SmilinStan
-  password: 'ship coffin krypt cross estate supply insurance asbestos souvenir'
+  password: '2342ship coffin krypt cross estate supply insurance asbestos souvenir'
   key: stan
   profileImage: '20.jpg'
   role: 'deluxe'
@@ -256,7 +256,7 @@
 -
   email: ethereum
   username: evmrox
-  password: 'private'
+  password: '123private'
   key: evm
   role: 'deluxe'
   feedback:
@@ -267,6 +267,6 @@
     answer: "Used Emporium"
 -
   email: testing
-  password: 'IamUsedForTesting'
+  password: 'I1amUsedForTesting'
   key: LetUsTest
   role: 'admin'

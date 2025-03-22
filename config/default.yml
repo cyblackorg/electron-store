@@ -9,9 +9,9 @@ application:
   favicon: favicon_es.ico
   theme: deeporange-indigo # Changed from bluegrey-lightgreen to create a distinct look
   showVersionNumber: true
-  showGitHubLinks: true
+  showGitHubLinks: false
   localBackupEnabled: true
-  numberOfRandomFakeUsers: 0
+  numberOfRandomFakeUsers: 10
   altcoinName: ElectronCoin
   privacyContactEmail: contact@electron-store.com
   customMetricsPrefix: electronstore
