@@ -24,7 +24,13 @@ module.exports = function login () {
       .then(([basket]: [BasketModel, boolean]) => {
         const token = security.authorize(user)
         user.bid = basket.id // keep track of original basket
-        security.authenticatedUsers.put(token, user)
+        //security.authenticatedUsers.put(token, user)
+        security.authenticatedUsers.put(token, {
+        status: 'authenticated',
+        iat: Math.floor(Date.now() / 1000),
+        exp: Math.floor(Date.now() / 1000) + 36000, // valid for 10 hour
+        ...user
+      })
         res.json({ authentication: { token, bid: basket.id, umail: user.data.email } })
       }).catch((error: Error) => {
         next(error)
