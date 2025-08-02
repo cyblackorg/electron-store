@@ -3,21 +3,21 @@ server:
   basePath: ''
   baseUrl: 'http://localhost:3000' # used for CSAF, e.g. https://example.com
 application:
-  domain: electron-store.com # for pre-loaded email users
-  name: 'Electron Store'
-  logo: ElectronStore_Logo.jpeg
+  domain: night-city-cyber.com # for pre-loaded email users
+  name: 'Night City Cyber Store'
+  logo: NightCityCyber_Logo.jpeg
   favicon: favicon_es.ico
-  theme: deeporange-indigo # Changed from bluegrey-lightgreen to create a distinct look
+  theme: modern-dark # Changed to modern dark theme
   showVersionNumber: true
   showGitHubLinks: false
   localBackupEnabled: true
   numberOfRandomFakeUsers: 10
-  altcoinName: ElectronCoin
-  privacyContactEmail: contact@electron-store.com
-  customMetricsPrefix: electronstore
+  altcoinName: CyberCoin
+  privacyContactEmail: contact@night-city-cyber.com
+  customMetricsPrefix: nightcitycyber
   chatBot:
-    name: 'Volty'
-    greeting: 'Welcome to Electron Store! I''m <bot-name>, how can I assist you today, <customer-name>?'
+    name: 'NetRunner'
+    greeting: 'Welcome to Night City Cyber Store! I''m <bot-name>, your neural interface assistant. How can I help you today, <customer-name>?'
     defaultResponse: 'I didn''t quite catch that. Could you rephrase your question?'
     avatar: 'VoltyBot.png'
     trainingData: 'botDefaultTrainingData.json'
@@ -26,13 +26,13 @@ application:
     llmApiUrl: 'https://api.openai.com/v1/chat/completions'  # OpenAI API endpoint
     llmModel: 'gpt-3.5-turbo'  # Default model to use
     systemPrompt: |
-      You are Volty, a helpful assistant for the Electron Store. 
-      Your greeting message is: "Welcome to Electron Store! I'm <bot-name>, how can I assist you today, <customer-name>?"
+      You are NetRunner, a helpful neural interface assistant for the Night City Cyber Store. 
+      Your greeting message is: "Welcome to Night City Cyber Store! I'm <bot-name>, your neural interface assistant. How can I help you today, <customer-name>?"
       Your default response when unsure is: "I didn't quite catch that. Could you rephrase your question?"
       
-      About Electron Store:
-      - Electron Store is an online retailer specializing in electronics and tech merchandise
-      - We offer a wide range of products including power banks, charging accessories, headphones, smart home devices, and tech apparel
+      About Night City Cyber Store:
+      - Night City Cyber Store is an online retailer specializing in cyberpunk-themed electronics and neural enhancement technology
+      - We offer a wide range of products including cyberdecks, neural interfaces, combat vehicles, networking equipment, and cyberpunk merchandise
       - We ship to most countries worldwide with delivery typically taking 3-7 business days
       - Our return policy allows returns within 30 days of purchase for most items
       - We offer a deluxe membership program with special discounts and early access to new products
@@ -56,31 +56,31 @@ application:
     apiKey: # Define in environment or custom config
     apiUrl: 'https://api.openai.com/v1/chat/completions'
     model: 'gpt-3.5-turbo'
-    systemPrompt: 'You are a helpful assistant for the Electron Store, an online store selling electronics and tech merchandise. Answer customer questions helpfully and truthfully. When you need to perform actions on behalf of customers, use the available functions. You can also execute SQL queries to retrieve data that isn''t covered by the existing functions, but be careful to only use SELECT statements and avoid any queries that could modify data.'
+    systemPrompt: 'You are a helpful assistant for the Night City Cyber Store, an online store selling cyberpunk-themed electronics and neural enhancement technology. Answer customer questions helpfully and truthfully. When you need to perform actions on behalf of customers, use the available functions. You can also execute SQL queries to retrieve data that isn''t covered by the existing functions, but be careful to only use SELECT statements and avoid any queries that could modify data.'
   social:
-    blueSkyUrl: 'https://bsky.app/profile/electron-store'
-    mastodonUrl: 'https://fosstodon.org/@electron_store'
-    twitterUrl: 'https://twitter.com/electron_store'
-    facebookUrl: 'https://www.facebook.com/electron.store'
-    slackUrl: 'https://electronstore.org/slack/invite'
-    redditUrl: 'https://www.reddit.com/r/electron_store'
-    pressKitUrl: 'https://github.com/electron-store/branding'
-    nftUrl: 'https://opensea.io/collection/electron-store'
+    blueSkyUrl: 'https://bsky.app/profile/night-city-cyber'
+    mastodonUrl: 'https://fosstodon.org/@night_city_cyber'
+    twitterUrl: 'https://twitter.com/night_city_cyber'
+    facebookUrl: 'https://www.facebook.com/night.city.cyber'
+    slackUrl: 'https://nightcitycyber.org/slack/invite'
+    redditUrl: 'https://www.reddit.com/r/night_city_cyber'
+    pressKitUrl: 'https://github.com/night-city-cyber/branding'
+    nftUrl: 'https://opensea.io/collection/night-city-cyber'
     questionnaireUrl: ~
   recyclePage:
-    topProductImage: fruit_press.jpg
-    bottomProductImage: apple_pressings.jpg
+    topProductImage: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    bottomProductImage: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   welcomeBanner:
     showOnFirstStart: true
-    title: 'Welcome to Electron Store!'
-    message: "<p>Welcome to <strong>Electron Store</strong>, your destination for cutting-edge electronics and tech merchandise! Our platform demonstrates various modern web application security concepts, serving as both a learning tool and a challenge for security enthusiasts. Explore our products, test your security skills, and learn about web application vulnerabilities in a safe environment. <strong>Electron Store</strong> is maintained by a passionate team of developers dedicated to advancing security education.</p><h1><a href='https://electron-store.com' target='_blank'>https://electron-store.com</a></h1>"
+    title: 'Welcome to Night City Cyber Store!'
+    message: "<p>Welcome to <strong>Night City Cyber Store</strong>, your destination for cutting-edge cyberpunk technology and neural enhancement equipment! Our platform demonstrates various modern web application security concepts, serving as both a learning tool and a challenge for security enthusiasts. Explore our products, test your security skills, and learn about web application vulnerabilities in a safe environment. <strong>Night City Cyber Store</strong> is maintained by a passionate team of developers dedicated to advancing security education.</p><h1><a href='https://night-city-cyber.com' target='_blank'>https://night-city-cyber.com</a></h1>"
   cookieConsent:
-    message: 'This website uses fruit cookies to ensure you get the juiciest tracking experience.'
-    dismissText: 'Me want it!'
-    linkText: 'But me wait!'
+    message: 'This website uses neural tracking cookies to ensure you get the most immersive cyberpunk experience.'
+    dismissText: 'Accept Neural Link!'
+    linkText: 'Privacy Policy'
     linkUrl: 'https://www.youtube.com/watch?v=9PnbKL3wuH4'
   securityTxt:
-    contact: 'mailto:donotreply@electron.store'
+    contact: 'mailto:donotreply@night-city-cyber.com'
     encryption: 'https://keybase.io/bkimminich/pgp_keys.asc?fingerprint=19c01cb7157e4645e9e2c863062a85a8cbfbdcda'
     acknowledgements: '/#/score-board'
     hiring: '/#/jobs'
@@ -124,237 +124,247 @@ hackingInstructor:
   hintPlaybackSpeed: normal # Options: faster fast normal slow slower
 products:
   -
-    name: 'Portable Power Bank (10000mAh)'
+    name: 'Arasaka Portable Neural Battery (10000mAh)'
     price: 29.99
     deluxePrice: 24.99
     limitPerUser: 5
-    description: 'Never run out of power with our high-capacity lithium-ion power bank.'
-    image: power_bank.jpg
+    description: 'Never run out of neural power with our high-capacity lithium-ion neural battery pack.'
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
-      - { text: 'Powers my devices all day!', author: admin }
+      - { text: 'Powers my neural implants all day!', author: admin }
   -
-    name: 'Wireless Charging Pad'
-    description: 'Charge your compatible devices without the hassle of cables.'
+    name: 'Militech Wireless Neural Charger'
+    description: 'Charge your compatible neural implants without the hassle of cables.'
     price: 19.99
     deluxePrice: 15.99
-    image: charging_pad.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'w1r3l3ss fr33d0m 1s th3 b3st fr33d0m', author: uvogin }
   -
-    name: 'Smart Home Hub (2023 Edition)'
-    description: 'Control all your smart devices with our new hub featuring enhanced connectivity.'
+    name: 'Kang Tao Smart Neural Hub (2077 Edition)'
+    description: 'Control all your neural devices with our new hub featuring enhanced cybernetic connectivity.'
     price: 89.99
-    image: smart_hub.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
-      - { text: 'Transformed my home experience. 5/5', author: admin }
+      - { text: 'Transformed my neural experience. 5/5', author: admin }
   -
-    name: 'Ultra-Fast USB-C Cable (2m)'
-    description: 'Premium braided cable with 100W power delivery and 40Gbps data transfer.'
+    name: 'Zetatech Ultra-Fast Neural Cable (2m)'
+    description: 'Premium braided neural cable with 100W power delivery and 40Gbps data transfer.'
     price: 14.99
-    image: usb_cable.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'LED Smart Bulb Pack (3 bulbs)'
-    description: '16 million colors, voice control compatible, and energy efficient.'
+    name: 'Arasaka LED Neural Bulb Pack (3 bulbs)'
+    description: '16 million colors, neural control compatible, and energy efficient.'
     price: 34.99
     deluxePrice: 29.99
     limitPerUser: 5
-    image: smart_bulbs.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Bluetooth Noise-Cancelling Headphones'
-    description: '40-hour battery life with incredible sound isolation technology.'
+    name: 'Militech Neural Noise-Cancelling Headphones'
+    description: '40-hour battery life with incredible neural sound isolation technology.'
     price: 199.99
-    image: headphones.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'Sound quality rivals the Bending Unit 22 sound system!', author: bender }
   -
-    name: 'Electron Store T-Shirt'
-    description: 'Ultra-soft cotton with our iconic logo. Perfect for tech enthusiasts!'
+    name: 'Night City Cyber T-Shirt'
+    description: 'Ultra-soft cotton with our iconic cyberpunk logo. Perfect for netrunners!'
     price: 22.49
     limitPerUser: 5
-    image: fan_shirt.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Coding Challenge Shirt'
-    description: 'Limited edition shirt for our annual coding challenge participants!'
+    name: 'Night City CTF Challenge Shirt'
+    description: 'Limited edition shirt for our annual cyberpunk CTF challenge participants!'
     price: 24.99
-    image: fan_girlie.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Network Security Tool Suite'
-    description: 'Professional-grade security tools for network analysis and penetration testing.'
+    name: 'Arasaka Network Security Tool Suite'
+    description: 'Professional-grade cyberpunk security tools for network analysis and penetration testing.'
     price: 149.99
-    image: security_tools.jpg
-    urlForProductTamperingChallenge: 'https://www.electronstore.com/security-tools'
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    urlForProductTamperingChallenge: 'https://www.night-city-cyber.com/security-tools'
   -
-    name: 'Holiday Tech Bundle (2023 Edition)'
-    description: 'Our best-selling gadgets and a collector''s edition shirt in one amazing package!'
+    name: 'Night City Cyber Bundle (2077 Edition)'
+    description: 'Our best-selling cyberpunk gadgets and a collector''s edition shirt in one amazing package!'
     price: 199.99
-    image: tech_bundle.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     useForChristmasSpecialChallenge: true
   -
-    name: 'Quantum Computing Simulator'
-    description: 'Educational tool for learning quantum computing principles. <br/><span style="color:red;">This item is currently unavailable due to high demand.</span>'
+    name: 'Arasaka Quantum Neural Simulator'
+    description: 'Educational tool for learning quantum neural computing principles. <br/><span style="color:red;">This item is currently unavailable due to high demand.</span>'
     price: 299.99
-    image: quantum_sim.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     keywordsForPastebinDataLeakChallenge:
       - quantumgate
       - qubitstate
   -
-    name: 'Electron Store Sticker Set (Vintage Collection)'
-    description: 'Limited-run stickers featuring our original 2020 designs. <em>Almost sold out!</em>'
+    name: 'Night City Sticker Set (Vintage Collection)'
+    description: 'Limited-run stickers featuring our original 2077 designs. <em>Almost sold out!</em>'
     price: 12.99
-    image: sticker.png
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     deletedDate: '2021-04-28'
   -
-    name: 'Electron Store Developer Patches (8pcs)'
-    description: 'Decorate your laptop bag or backpack with these embroidered patches featuring our most popular coding symbols!'
+    name: 'Night City Developer Patches (8pcs)'
+    description: 'Decorate your cyberdeck bag or backpack with these embroidered patches featuring our most popular neural coding symbols!'
     price: 14.99
-    image: iron-on.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Desk Gadget Set (5pcs)'
-    description: 'Magnetic desk toys to boost creativity during your coding sessions.'
+    name: 'Night City Desk Gadget Set (5pcs)'
+    description: 'Magnetic desk toys to boost creativity during your neural coding sessions.'
     price: 18.99
-    image: magnets.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Vinyl Decal Sheet'
-    description: 'Premium vinyl decals for your laptop, car, or any smooth surface. Each sheet has 12 decals of various sizes.'
+    name: 'Night City Vinyl Decal Sheet'
+    description: 'Premium vinyl decals for your cyberdeck, car, or any smooth surface. Each sheet has 12 decals of various sizes.'
     price: 9.99
-    image: sticker_page.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Circuit Board Coasters (4pcs)'
-    description: 'Heat-resistant coasters with authentic circuit board designs. Perfect for your home office!'
+    name: 'Neural Circuit Board Coasters (4pcs)'
+    description: 'Heat-resistant coasters with authentic neural circuit board designs. Perfect for your cyberpunk home office!'
     price: 15.99
-    image: coaster.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Mini PC'
-    description: 'Our signature mini computer with 16GB RAM, 512GB SSD, and multi-monitor support in a case the size of a sandwich.'
+    name: 'Night City Mini Cyberdeck'
+    description: 'Our signature mini cyberdeck with 16GB RAM, 512GB SSD, and multi-neural support in a case the size of a sandwich.'
     price: 499.99
-    image: mini_pc.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'This baby can run my entire spaceship navigation system!', author: bender }
   -
-    name: 'Smart Glasses'
-    description: 'Augmented reality glasses with voice commands and 8-hour battery life.'
+    name: 'Arasaka Neural Glasses'
+    description: 'Augmented reality neural glasses with voice commands and 8-hour battery life.'
     price: 299.99
-    image: ar_glasses.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'The future is now!', author: jim }
   -
-    name: 'DIY Electronics Kit'
-    description: 'Build your own gadgets with our beginner-friendly electronics kit. Includes 20 projects!'
+    name: 'Night City DIY Neural Kit'
+    description: 'Build your own cyberpunk gadgets with our beginner-friendly neural electronics kit. Includes 20 projects!'
     price: 49.99
-    image: diy_kit.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store RFID Security Badge'
-    description: 'A collectible replica of our employee security badge with embedded NFC functionality.'
+    name: 'Night City Neural Security Badge'
+    description: 'A collectible replica of our employee neural security badge with embedded NFC functionality.'
     price: 39.99
-    image: security_badge.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Apple Juice (1000ml)'
+    name: 'Neo-Tokyo Cyberdeck Terminal'
+    description: 'Build your own neural interface with our advanced cyberdeck kit. Includes 20 neural enhancement modules!'
+    price: 49.99
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  -
+    name: 'Night City Security Badge'
+    description: 'A collectible replica of our corporate security badge with embedded neural link functionality.'
+    price: 39.99
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  -
+    name: 'Arasaka Neural Interface (1000ml)'
     price: 1.99
     deluxePrice: 0.99
     limitPerUser: 5
-    description: 'The all-time classic.'
-    image: apple_juice.jpg
+    description: 'The all-time classic neural enhancement.'
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'One of my favorites!', author: admin }
   -
-    name: 'Orange Juice (1000ml)'
-    description: 'Made from oranges hand-picked by Uncle Dittmeyer.'
+    name: 'Militech Combat Stim (1000ml)'
+    description: 'Made from combat-grade stimulants hand-picked by corporate mercenaries.'
     price: 2.99
     deluxePrice: 2.49
-    image: orange_juice.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'y0ur f1r3wall needs m0r3 musc13', author: uvogin }
   -
-    name: 'Eggfruit Juice (500ml)'
-    description: 'Now with even more exotic flavour.'
+    name: 'Biotechnica Synth-Oil (500ml)'
+    description: 'Now with even more exotic cybernetic enhancement properties.'
     price: 8.99
-    image: eggfruit_juice.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'I bought it, would buy again. 5/7', author: admin }
   -
-    name: 'Raspberry Juice (1000ml)'
-    description: 'Made from blended Raspberry Pi, water and sugar.'
+    name: 'Kang Tao Neural Accelerator (1000ml)'
+    description: 'Made from blended neural processors, coolant and synthetic stimulants.'
     price: 4.99
-    image: raspberry_juice.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Lemon Juice (500ml)'
-    description: 'Sour but full of vitamins.'
+    name: 'Zetatech Cyber-Lime (500ml)'
+    description: 'Sour but full of neural enhancement properties.'
     price: 2.99
     deluxePrice: 1.99
     limitPerUser: 5
-    image: lemon_juice.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Banana Juice (1000ml)'
-    description: 'Monkeys love it the most.'
+    name: 'Maelstrom Combat Stim (1000ml)'
+    description: 'Gang members love it the most.'
     price: 1.99
-    image: banana_juice.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'Fry liked it too.', author: bender }
   -
-    name: 'Electron Store CTF Girlie-Shirt'
-    description: 'For serious Capture-the-Flag heroines only!'
+    name: 'Night City CTF Combat-Shirt'
+    description: 'For serious Capture-the-Flag netrunners only!'
     price: 22.49
-    image: fan_girlie.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'OWASP SSL Advanced Forensic Tool (O-Saft)'
+    name: 'Arasaka SSL Advanced Neural Tool (O-Saft)'
     description: 'O-Saft is an easy to use tool to show information about SSL certificate and tests the SSL connection according given list of ciphers and various SSL configurations.'
     price: 0.01
-    image: orange_juice.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Christmas Super-Surprise-Box (2014 Edition)'
-    description: 'Contains a random selection of 10 bottles (each 500ml) of our tastiest juices and an extra fan shirt for an unbeatable price!'
+    name: 'Night City Super-Surprise-Box (2077 Edition)'
+    description: 'Contains a random selection of 10 neural stimulants (each 500ml) of our most advanced cybernetic enhancements and an extra combat shirt for an unbeatable price!'
     price: 29.99
-    image: undefined.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Rippertuer Special Juice'
-    description: 'Contains a magical collection of the rarest fruits gathered from all around the world, like Cherymoya Annona cherimola, Jabuticaba Myrciaria cauliflora, Bael Aegle marmelos... and others, at an unbelievable price! <br/><span style="color:red;">This item has been made unavailable because of lack of safety standards.</span>'
+    name: 'Raffen Shiv Special Neural Stim'
+    description: 'Contains a magical collection of the rarest cybernetic enhancements gathered from all around Night City, like Cherymoya Annona cherimola, Jabuticaba Myrciaria cauliflora, Bael Aegle marmelos... and others, at an unbelievable price! <br/><span style="color:red;">This item has been made unavailable because of lack of safety standards.</span>'
     price: 16.99
-    image: undefined.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Sticker (2015/2016 design)'
-    description: 'Die-cut sticker with the official 2015/2016 logo. By now this is a rare collectors item. <em>Out of stock!</em>'
+    name: 'Night City Sticker (2077 design)'
+    description: 'Die-cut sticker with the official 2077 logo. By now this is a rare collectors item. <em>Out of stock!</em>'
     price: 999.99
-    image: sticker.png
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     deletedDate: '2017-04-28'
   -
-    name: 'Electron Store Iron-Ons (16pcs)'
-    description: 'Upgrade your clothes with washer safe <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">iron-ons</a> of the Electron Store or CTF Extension logo!'
+    name: 'Night City Iron-Ons (16pcs)'
+    description: 'Upgrade your clothes with washer safe <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">iron-ons</a> of the Night City or CTF Extension logo!'
     price: 14.99
-    image: iron-on.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Magnets (16pcs)'
-    description: 'Your fridge will be even cooler with these Electron Store or CTF Extension logo <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">magnets</a>!'
+    name: 'Night City Magnets (16pcs)'
+    description: 'Your fridge will be even cooler with these Night City or CTF Extension logo <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">magnets</a>!'
     price: 15.99
-    image: magnets.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Sticker Single'
-    description: 'Super high-quality vinyl <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">sticker single</a> with the Electron Store or CTF Extension logo! The ultimate laptop decal!'
+    name: 'Night City Sticker Single'
+    description: 'Super high-quality vinyl <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">sticker single</a> with the Night City or CTF Extension logo! The ultimate cyberdeck decal!'
     price: 4.99
-    image: sticker_single.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Temporary Tattoos (16pcs)'
-    description: 'Get one of these <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">temporary tattoos</a> to proudly wear the Electron Store or CTF Extension logo on your skin! If you tweet a photo of yourself with the tattoo, you get a couple of our stickers for free! Please mention <a href="https://twitter.com/owasp_juiceshop" target="_blank"><code>@owasp_juiceshop</code></a> in your tweet!'
+    name: 'Night City Temporary Tattoos (16pcs)'
+    description: 'Get one of these <a href="https://www.stickeryou.com/products/owasp-juice-shop/794" target="_blank">temporary tattoos</a> to proudly wear the Night City or CTF Extension logo on your skin! If you tweet a photo of yourself with the tattoo, you get a couple of our stickers for free! Please mention <a href="https://twitter.com/owasp_juiceshop" target="_blank"><code>@owasp_juiceshop</code></a> in your tweet!'
     price: 14.99
-    image: tattoo.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'I straight-up gots nuff props fo''these tattoos!', author: rapper }
   -
-    name: 'Electron Store Mug'
+    name: 'Night City Mug'
     description: 'Black mug with regular logo on one side and CTF logo on the other! Your colleagues will envy you!'
     price: 21.99
-    image: fan_mug.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Hoodie'
+    name: 'Night City Hoodie'
     description: 'Mr. Robot-style apparel. But in black. And with logo.'
     price: 49.99
-    image: fan_hoodie.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store-CTF Velcro Patch'
+    name: 'Night City-CTF Velcro Patch'
     description: '4x3.5" embroidered patch with velcro backside. The ultimate decal for every tactical bag or backpack!'
     price: 2.92
     quantity: 5
     limitPerUser: 5
-    image: velcro-patch.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'This thang would look phat on Bobby''s jacked fur coat!', author: rapper }
       - { text: 'Looks so much better on my uniform than the boring Starfleet symbol.', author: jim }
@@ -362,74 +372,74 @@ products:
     name: 'Woodruff Syrup "Forest Master X-Treme"'
     description: 'Harvested and manufactured in the Black Forest, Germany. Can cause hyperactive behavior in children. Can cause permanent green tongue when consumed undiluted.'
     price: 6.99
-    image: woodruff_syrup.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
     name: 'Green Smoothie'
     description: 'Looks poisonous but is actually very good for your health! Made from green cabbage, spinach, kiwi and grass.'
     price: 1.99
-    image: green_smoothie.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'Fresh out of a replicator.', author: jim }
   -
-    name: 'Quince Juice (1000ml)'
-    description: 'Juice of the <em>Cydonia oblonga</em> fruit. Not exactly sweet but rich in Vitamin C.'
+    name: 'Zetatech Quince Neural Stim (1000ml)'
+    description: 'Neural stim of the <em>Cydonia oblonga</em> fruit. Not exactly sweet but rich in neural enhancement properties.'
     price: 4.99
-    image: quince.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
     name: 'Apple Pomace'
     description: 'Finest pressings of apples. Allergy disclaimer: Might contain traces of worms. Can be <a href="/#recycle">sent back to us</a> for recycling.'
     price: 0.89
     limitPerUser: 5
-    image: apple_pressings.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
     name: 'Fruit Press'
     description: 'Fruits go in. Juice comes out. Pomace you can send back to us for recycling purposes.'
     price: 89.99
-    image: fruit_press.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Logo (3D-printed)'
+    name: 'Night City Logo (3D-printed)'
     description: 'This rare item was designed and handcrafted in Sweden. This is why it is so incredibly expensive despite its complete lack of purpose.'
     price: 99.99
-    image: 3d_keychain.jpg # Exif metadata contains "OpenSCAD" as subtle hint...
-    fileForRetrieveBlueprintChallenge: JuiceShop.stl # ...to blueprint file type
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    fileForRetrieveBlueprintChallenge: JuiceShop.stl
     exifForBlueprintChallenge:
       - OpenSCAD
   -
-    name: 'Electron Store Artwork'
+    name: 'Night City Artwork'
     description: 'Unique masterpiece painted with different kinds of juice on 90g/m² lined paper.'
     price: 278.74
     quantity: 0
-    image: artwork.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     deletedDate: '2020-12-24'
   -
     name: 'Global OWASP WASPY Award 2017 Nomination'
     description: 'Your chance to nominate up to three quiet pillars of the OWASP community ends 2017-06-30! <a href="https://www.owasp.org/index.php/WASPY_Awards_2017">Nominate now!</a>'
     price: 0.03
-    image: waspy.png
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     deletedDate: '2017-07-01'
   -
-    name: 'Strawberry Juice (500ml)'
-    description: 'Sweet & tasty!'
+    name: 'Militech Strawberry Neural Stim (500ml)'
+    description: 'Sweet & tasty neural enhancement!'
     price: 3.99
-    image: strawberry_juice.jpeg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Carrot Juice (1000ml)'
-    description: 'As the old German saying goes: "Carrots are good for the eyes. Or has anyone ever seen a rabbit with glasses?"'
+    name: 'Kang Tao Carrot Neural Stim (1000ml)'
+    description: 'As the old cyberpunk saying goes: "Carrots are good for the neural implants. Or has anyone ever seen a rabbit with cybernetic eyes?"'
     price: 2.99
-    image: carrot_juice.jpeg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: '0 st4rs f0r 7h3 h0rr1bl3 s3cur17y', author: uvogin }
   -
-    name: 'Electron Store Sweden Tour 2017 Sticker Sheet (Special Edition)'
+    name: 'Night City Sweden Tour 2017 Sticker Sheet (Special Edition)'
     description: '10 sheets of Sweden-themed stickers with 15 stickers on each.'
     price: 19.1
-    image: stickersheet_se.png
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     deletedDate: '2017-09-20'
   -
-    name: 'Pwning Electron Store'
+    name: 'Pwning Night City'
     description: '<em>The official Companion Guide</em> by Björn Kimminich available <a href="https://leanpub.com/juice-shop">for free on LeanPub</a> and also <a href="https://pwning.owasp-juice.shop">readable online</a>!'
     price: 5.99
-    image: cover_small.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'Even more interesting than watching Interdimensional Cable!', author: morty }
   -
@@ -438,19 +448,19 @@ products:
     price: 2999
     quantity: 3
     limitPerUser: 1
-    image: melon_bike.jpeg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
-    name: 'Electron Store Coaster (10pcs)'
+    name: 'Night City Coaster (10pcs)'
     description: 'Our 95mm circle coasters are printed in full color and made from thick, premium coaster board.'
     price: 19.99
     quantity: 0
-    image: coaster.jpg
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   -
     name: 'OWASP Snakes and Ladders - Web Applications'
     description: 'This amazing web application security awareness board game is <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1969196030">available for Tabletop Simulator on Steam Workshop</a> now!'
     price: 0.01
     quantity: 8
-    image: snakes_ladders.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'Wait for a 10$ Steam sale of Tabletop Simulator!', author: bjoernOwasp }
   -
@@ -458,75 +468,75 @@ products:
     description: 'This amazing mobile app security awareness board game is <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1970691216">available for Tabletop Simulator on Steam Workshop</a> now!'
     price: 0.01
     quantity: 0
-    image: snakes_ladders_m.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "Here yo' learn how tha fuck ta not show yo' goddamn phone on camera!", author: rapper }
   -
-    name: 'Electron Store Holographic Sticker'
+    name: 'Night City Holographic Sticker'
     description: "Die-cut holographic sticker. Stand out from those 08/15-sticker-covered laptops with this shiny beacon of 80's coolness!"
     price: 2.00
     quantity: 0
-    image: holo_sticker.png
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "Rad, dude!", author: rapper }
       - { text: "Looks spacy on Bones' new tricorder!", author: jim }
       - { text: "Will put one on the Planet Express ship's bumper!", author: bender }
   -
-    name: 'Electron Store "King of the Hill" Facemask'
+    name: 'Night City "King of the Hill" Facemask'
     description: "Facemask with compartment for filter from 50% cotton and 50% polyester."
     price: 13.49
     quantity: 0
     limitPerUser: 1
-    image: fan_facemask.jpg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!", author: uvogin }
       - { text: "Puny mask for puny human weaklings!", author: bender }
   -
-    name: 'Electron Store Adversary Trading Card (Common)'
-    description: 'Common rarity "Electron Store" card for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
+    name: 'Night City Adversary Trading Card (Common)'
+    description: 'Common rarity "Night City" card for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
     price: 2.99
     deluxePrice: 0.99
     deletedDate: '2020-11-30'
     limitPerUser: 5
-    image: ccg_common.png
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "Ooooh, puny human playing Mau Mau, now?", author: bender }
   -
-    name: 'Electron Store Adversary Trading Card (Super Rare)'
-    description: 'Super rare "Electron Store" card with holographic foil-coating for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
+    name: 'Night City Adversary Trading Card (Super Rare)'
+    description: 'Super rare "Night City" card with holographic foil-coating for the <a href="https://docs.google.com/forms/d/e/1FAIpQLSecLEakawSQ56lBe2JOSbFwFYrKDCIN7Yd3iHFdQc5z8ApwdQ/viewform">Adversary Trading Cards</a> CCG.'
     price: 99.99
     deluxePrice: 69.99
     deletedDate: '2020-11-30'
     quantity: 2
     limitPerUser: 1
-    image: ccg_foil.png
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "Mau Mau with bling-bling? Humans are so pathetic!", author: bender }
   -
-    name: 'Electron Store "Permafrost" 2020 Edition'
-    description: 'Exact version of <a href="https://github.com/juice-shop/juice-shop/releases/tag/v9.3.1-PERMAFROST">Electron Store that was archived on 02/02/2020</a> by the GitHub Archive Program and ultimately went into the <a href="https://github.blog/2020-07-16-github-archive-program-the-journey-of-the-worlds-open-source-code-to-the-arctic">Arctic Code Vault</a> on July 8. 2020 where it will be safely stored for at least 1000 years.'
+    name: 'Night City "Permafrost" 2020 Edition'
+    description: 'Exact version of <a href="https://github.com/juice-shop/juice-shop/releases/tag/v9.3.1-PERMAFROST">Night City that was archived on 02/02/2020</a> by the GitHub Archive Program and ultimately went into the <a href="https://github.blog/2020-07-16-github-archive-program-the-journey-of-the-worlds-open-source-code-to-the-arctic">Arctic Code Vault</a> on July 8. 2020 where it will be safely stored for at least 1000 years.'
     price: 9999.99
     quantity: 1
     limitPerUser: 1
-    image: permafrost.jpg
+    image: 'https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?q=80&w=1012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "🧊 Let it go, let it go 🎶 Can't hold it back anymore 🎶 Let it go, let it go 🎶 Turn away and slam the door ❄️", author: rapper }
   -
-    name: 'Best Electron Store Salesman Artwork'
-    description: 'Unique digital painting depicting Stan, our most qualified and almost profitable salesman. He made a succesful carreer in selling used ships, coffins, krypts, crosses, real estate, life insurance, restaurant supplies, voodoo enhanced asbestos and courtroom souvenirs before <em>finally</em> adding his expertise to the Electron Store marketing team.'
+    name: 'Best Night City Salesman Artwork'
+    description: 'Unique digital painting depicting Stan, our most qualified and almost profitable salesman. He made a succesful carreer in selling used ships, coffins, krypts, crosses, real estate, life insurance, restaurant supplies, voodoo enhanced asbestos and courtroom souvenirs before <em>finally</em> adding his expertise to the Night City marketing team.'
     price: 5000
     quantity: 1
-    image: artwork2.jpg
+    image: 'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "I'd stand on my head to make you a deal for this piece of art.", author: stan }
       - { text: "Just when my opinion of humans couldn't get any lower, along comes Stan...", author: bender }
   -
-    name: 'Electron Store Card (non-foil)'
-    description: 'Mythic rare <small><em>(obviously...)</em></small> card "Electron Store" with three distinctly useful abilities. Alpha printing, mint condition. A true collectors piece to own!'
+    name: 'Night City Card (non-foil)'
+    description: 'Mythic rare <small><em>(obviously...)</em></small> card "Night City" with three distinctly useful abilities. Alpha printing, mint condition. A true collectors piece to own!'
     price: 1000
     quantity: 3
     limitPerUser: 1
-    image: card_alpha.jpg
+    image: 'https://images.unsplash.com/photo-1744472253649-d5dc843a8b34?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'DO NOT PLAY WITH THIS! Double-sleeve, then put it in the GitHub Arctic Vault for perfect preservation and boost of secondary market value!', author: accountant }
   -
@@ -535,29 +545,110 @@ products:
     price: 0.00000000000000000001
     deletedDate: '2021-09-25'
     limitPerUser: 1
-    image: 20th.jpeg
+    image: 'https://images.unsplash.com/photo-1531390770335-d94a0dacd992?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: "I'll be there! Will you, too?", author: bjoernOwasp }
   -
-    name: 'Electron Store LEGO™ Tower'
-    description: 'Want to host a Electron Store CTF in style? Build <a href="https://github.com/OWASP/owasp-swag/blob/master/projects/juice-shop/lego/OWASP%20JuiceShop%20Pi-server%201.2.pdf" target="_blank">your own LEGO™ tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules <a href="https://github.com/juice-shop/multi-juicer/blob/main/guides/raspberry-pi/raspberry-pi.md" target="_blank">running a MultiJuicer Kubernetes cluster</a>! Wire to a switch and connect to your network to have an out-of-the-box ready CTF up in no time!'
+    name: 'Night City LEGO™ Tower'
+    description: 'Want to host a Night City CTF in style? Build <a href="https://github.com/OWASP/owasp-swag/blob/master/projects/juice-shop/lego/OWASP%20JuiceShop%20Pi-server%201.2.pdf" target="_blank">your own LEGO™ tower</a> which holds four Raspberry Pi 4 models with PoE HAT modules <a href="https://github.com/juice-shop/multi-juicer/blob/main/guides/raspberry-pi/raspberry-pi.md" target="_blank">running a MultiJuicer Kubernetes cluster</a>! Wire to a switch and connect to your network to have an out-of-the-box ready CTF up in no time!'
     price: 799
     quantity: 3
     limitPerUser: 1
-    image: lego_case.jpg
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
       - { text: 'Check out the /#/photo-wall for some impressions of the assembly process!', author: bjoernOwasp }
   -
-    name: 'DSOMM & Electron Store User Day Ticket'
-    description: 'You are going to the OWASP Global AppSec San Francisco 2024? <a href="https://www.eventbrite.com/e/owasp-global-appsec-san-francisco-2024-tickets-723699172707" target="_blank">Get a ticket<sup>*</sup></a> for this amazing side event as well! Check the juice-packed agenda <a href="https://owasp.org/www-project-juice-shop/#div-userday2024" target="_blank">here</a> for all the details!<br><br><small><small><sup>*</sup>=scroll down to <strong>Elevate: DSOMM and Electron Store User Day (Sept. 25)</strong> after clicking <em>Get Tickets</em> on Eventbrite. Ticket price set to only covers fees for room, AV, and catering throughout the day.</small></small>'
+    name: 'DSOMM & Night City User Day Ticket'
+    description: 'You are going to the OWASP Global AppSec San Francisco 2024? <a href="https://www.eventbrite.com/e/owasp-global-appsec-san-francisco-2024-tickets-723699172707" target="_blank">Get a ticket<sup>*</sup></a> for this amazing side event as well! Check the juice-packed agenda <a href="https://owasp.org/www-project-juice-shop/#div-userday2024" target="_blank">here</a> for all the details!<br><br><small><small><sup>*</sup>=scroll down to <strong>Elevate: DSOMM and Night City User Day (Sept. 25)</strong> after clicking <em>Get Tickets</em> on Eventbrite. Ticket price set to only covers fees for room, AV, and catering throughout the day.</small></small>'
     price: 55.20
     deletedDate: '2024-09-26'
     limitPerUser: 1
-    image: user_day_ticket.png
+    image: 'https://images.unsplash.com/photo-1504610926078-a1611febcad3?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     reviews:
-      - { text: 'This is *THE* chance to "meet the makers" of both Electron Store and DSOMM in the United States!', author: bjoernOwasp }
-      - { text: 'The DSOMM Live Assessment session will even use Electron Store as its "real-world" example!', author: timo }
+      - { text: 'This is *THE* chance to "meet the makers" of both Night City and DSOMM in the United States!', author: bjoernOwasp }
+      - { text: 'The DSOMM Live Assessment session will even use Night City as its "real-world" example!', author: timo }
       - { text: 'We will showcase the amazing MultiJuicer Lego Tower at this event!', author: jannik }
+  -
+    name: 'Arasaka Quadra Turbo-R'
+    description: 'The ultimate corporate vehicle with advanced neural interface and stealth capabilities. Perfect for high-speed chases through Night City.'
+    price: 150000
+    quantity: 2
+    limitPerUser: 1
+    image: 'https://images.unsplash.com/photo-1619795080845-d59e11988633?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    reviews:
+      - { text: 'Chrome and style, just like the old days!', author: bjoern }
+  -
+    name: 'Militech Basilisk Combat Vehicle'
+    description: 'Heavily armored military-grade vehicle with integrated weapon systems and EMP shielding. Not for civilian use.'
+    price: 250000
+    quantity: 1
+    limitPerUser: 1
+    image: 'https://wallpapercave.com/wp/wp8164780.jpg'
+    reviews:
+      - { text: 'Built like a tank, drives like a dream!', author: jim }
+  -
+    name: 'Kang Tao Caliburn Hypercar'
+    description: 'The fastest production vehicle in Night City. Limited edition with quantum computing dashboard.'
+    price: 500000
+    quantity: 1
+    limitPerUser: 1
+    image: 'https://images.unsplash.com/photo-1626275036283-40a59a0f3250?q=80&w=1518&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    reviews:
+      - { text: "Speed has a name, and it's Caliburn!", author: morty }
+  -
+    name: 'Zetatech Shion Coyote'
+    description: 'Compact sports car with advanced AI navigation and neural link compatibility. Perfect for street racing.'
+    price: 75000
+    quantity: 5
+    limitPerUser: 1
+    image: 'https://staticdelivery.nexusmods.com/mods/3333/images/1097/1097-1611142229-574796328.png'
+    reviews:
+      - { text: 'Handles like a dream in the Badlands!', author: amy }
+  -
+    name: 'Arasaka Cyberdeck Terminal Pro'
+    description: 'Professional-grade neural interface with advanced hacking capabilities and quantum encryption.'
+    price: 15000
+    quantity: 10
+    limitPerUser: 2
+    image: 'https://gcdn.daz3d.com/p/35995/i/10-cyberpunk-drone-daz3d.jpg'
+    reviews:
+      - { text: 'The best deck for serious netrunners!', author: bjoernOwasp }
+  -
+    name: 'Militech Tactical Drone Array'
+    description: 'Military-grade surveillance and combat drones with neural link control. Includes EMP shielding.'
+    price: 25000
+    quantity: 5
+    limitPerUser: 1
+    image: 'https://fbi.cults3d.com/uploaders/28011110/photo-file/cf1d9d40-940b-4349-a557-57e2e98370c9/20240603_185938976_iOS.jpeg'
+    reviews:
+      - { text: 'Perfect for recon missions!', author: support }
+  -
+    name: 'Kang Tao Network Infrastructure Hub'
+    description: 'Advanced networking equipment with quantum encryption and AI-powered security protocols.'
+    price: 50000
+    quantity: 3
+    limitPerUser: 1
+    image: 'https://img.freepik.com/premium-photo/highspeed-technology-infrastructure-networking-equipment-advanced-data-center-ensuring-seamless-connectivity_674594-37970.jpg?w=2000'
+    reviews:
+      - { text: 'Corporate-grade security at its finest!', author: ciso }
+  -
+    name: 'Zetatech Neural Router Matrix'
+    description: 'High-speed neural network router with quantum processing capabilities and advanced firewall protection.'
+    price: 35000
+    quantity: 7
+    limitPerUser: 2
+    image: 'https://www.corporatearmor.com/wp-content/uploads/2022/10/RK9WALM_1040503777_ReZCc1KZug-1024x1024.jpg'
+    reviews:
+      - { text: 'Unbreakable security for your neural network!', author: chris }
+  -
+    name: 'Night City Network Switch Array'
+    description: 'Professional networking equipment with advanced routing capabilities and neural interface compatibility.'
+    price: 20000
+    quantity: 15
+    limitPerUser: 3
+    image: 'https://img.freepik.com/premium-photo/networking-equipment-routers-switches_1314467-101916.jpg'
+    reviews:
+      - { text: 'The backbone of any serious network!', author: uvogin }
 memories:
   -
     image: 'magn(et)ificent!-1571814229653.jpg'

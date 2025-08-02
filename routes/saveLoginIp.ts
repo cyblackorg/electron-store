@@ -6,9 +6,9 @@
 import { type Request, type Response, type NextFunction } from 'express'
 import { UserModel } from '../models/user'
 import challengeUtils = require('../lib/challengeUtils')
+import * as security from '../lib/insecurity'
 
 import * as utils from '../lib/utils'
-const security = require('../lib/insecurity')
 const cache = require('../data/datacache')
 const challenges = cache.challenges
 
@@ -17,6 +17,12 @@ module.exports = function saveLoginIp () {
     const loggedInUser = security.authenticatedUsers.from(req)
     if (loggedInUser !== undefined) {
       let lastLoginIp = req.headers['true-client-ip']
+      
+      // Check for blacklisted header injection payloads
+      if (lastLoginIp && security.checkBlacklistedPayload(String(lastLoginIp))) {
+        return res.status(451).send(res.__('Malicious activity detected. Please try a different approach.'))
+      }
+      
       if (utils.isChallengeEnabled(challenges.httpHeaderXssChallenge)) {
         challengeUtils.solveIf(challenges.httpHeaderXssChallenge, () => { return lastLoginIp === '<iframe src="javascript:alert(`xss`)">' })
       } else {

@@ -9,8 +9,7 @@ import { type Request, type Response, type NextFunction } from 'express'
 import { type Review } from 'data/types'
 import * as db from '../data/mongodb'
 import { challenges } from '../data/datacache'
-
-const security = require('../lib/insecurity')
+import * as security from '../lib/insecurity'
 
 // Blocking sleep function as in native MongoDB
 // @ts-expect-error FIXME Type safety broken for global object
@@ -29,6 +28,11 @@ module.exports = function productReviews () {
   return (req: Request, res: Response, next: NextFunction) => {
     // Truncate id to avoid unintentional RCE
     const id = !utils.isChallengeEnabled(challenges.noSqlCommandChallenge) ? Number(req.params.id) : utils.trunc(req.params.id, 40)
+
+    // Check for blacklisted NoSQL injection payloads
+    if (security.checkBlacklistedPayload(String(id))) {
+      return res.status(451).send(res.__('Malicious activity detected. Please try a different approach.'))
+    }
 
     // Measure how long the query takes, to check if there was a nosql dos attack
     const t0 = new Date().getTime()

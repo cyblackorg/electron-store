@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
   public languages: any[] = []
   public selectedLanguage: string = 'placeholder'
   public version: string = ''
-  public applicationName: string = 'Electron Store'
+  public applicationName: string = 'Night City Cyber Store'
   public showGitHubLink: boolean = true
   public gitHubRibbon: string = 'orange'
   public logoSrc: string = 'assets/public/images/ElectronStore_Logo.jpeg'

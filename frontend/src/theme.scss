@@ -93,3 +93,33 @@ $deeporange-indigo-theme: mat.define-light-theme((
 
 .deeporange-indigo-theme {
   @include mat.all-component-colors($deeporange-indigo-theme); }
+
+// Modern Dark Theme - New contemporary color scheme
+$modern-dark-primary: mat.define-palette(mat.$indigo-palette, 600, 400, 800);
+$modern-dark-accent: mat.define-palette(mat.$teal-palette, A200, A100, A400);
+$modern-dark-warn: mat.define-palette(mat.$red-palette, 600, 400, 800);
+$modern-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $modern-dark-primary,
+    accent: $modern-dark-accent,
+    warn: $modern-dark-warn,
+  ),
+));
+
+.modern-dark-theme {
+  @include mat.all-component-colors($modern-dark-theme); }
+
+// Modern Light Theme - Clean and contemporary
+$modern-light-primary: mat.define-palette(mat.$blue-palette, 700, 500, 900);
+$modern-light-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
+$modern-light-warn: mat.define-palette(mat.$red-palette, 600, 400, 800);
+$modern-light-theme: mat.define-light-theme((
+  color: (
+    primary: $modern-light-primary,
+    accent: $modern-light-accent,
+    warn: $modern-light-warn,
+  ),
+));
+
+.modern-light-theme {
+  @include mat.all-component-colors($modern-light-theme); }

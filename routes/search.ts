@@ -7,6 +7,7 @@ import * as models from '../models/index'
 import { type Request, type Response, type NextFunction } from 'express'
 import { UserModel } from '../models/user'
 import { challenges } from '../data/datacache'
+import * as security from '../lib/insecurity'
 
 import * as utils from '../lib/utils'
 const challengeUtils = require('../lib/challengeUtils')
@@ -20,6 +21,12 @@ module.exports = function searchProducts () {
   return (req: Request, res: Response, next: NextFunction) => {
     let criteria: any = req.query.q === 'undefined' ? '' : req.query.q ?? ''
     criteria = (criteria.length <= 200) ? criteria : criteria.substring(0, 200)
+    
+    // Check for blacklisted XSS payloads
+    if (security.checkBlacklistedPayload(criteria)) {
+      return res.status(451).send(res.__('Malicious activity detected. Please try a different approach.'))
+    }
+    
     models.sequelize.query(`SELECT * FROM Products WHERE ((name LIKE '%${criteria}%' OR description LIKE '%${criteria}%') AND deletedAt IS NULL) ORDER BY name`) // vuln-code-snippet vuln-line unionSqlInjectionChallenge dbSchemaChallenge
       .then(([products]: any) => {
         const dataString = JSON.stringify(products)

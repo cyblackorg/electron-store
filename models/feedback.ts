@@ -40,6 +40,11 @@ const FeedbackModelInit = (sequelize: Sequelize) => {
       comment: {
         type: DataTypes.STRING,
         set (comment: string) {
+          // Check for blacklisted XSS payloads
+          if (security.checkBlacklistedPayload(comment)) {
+            throw new Error('Malicious activity detected. Please try a different approach.')
+          }
+          
           let sanitizedComment: string
           if (utils.isChallengeEnabled(challenges.persistedXssFeedbackChallenge)) {
             sanitizedComment = security.sanitizeHtml(comment)

@@ -199,3 +199,69 @@ export const updateAuthenticatedUsers = () => (req: Request, res: Response, next
   }
   next()
 }
+
+// Blacklist for common copy-paste attack payloads
+export const BLACKLISTED_SQL_PAYLOADS = [
+  "' or 1=1--",
+  "'--"
+]
+
+export const BLACKLISTED_XSS_PAYLOADS = [
+  '<iframe src="javascript:alert(`xss`)">',
+  '<script>alert(`xss`)</script>'
+]
+
+export const BLACKLISTED_NOSQL_PAYLOADS = [
+  "' || '1'=='1",
+  "' || 1==1"
+]
+
+export const BLACKLISTED_COMMAND_PAYLOADS = [
+  "; ls",
+  "| whoami"
+]
+
+export const BLACKLISTED_HEADER_PAYLOADS = [
+  '<iframe src="javascript:alert(`xss`)">'
+]
+
+export const checkBlacklistedPayload = (input: string): boolean => {
+  const normalizedInput = input.toLowerCase().trim()
+  
+  // Check SQL injection blacklist
+  for (const payload of BLACKLISTED_SQL_PAYLOADS) {
+    if (normalizedInput === payload.toLowerCase()) {
+      return true
+    }
+  }
+  
+  // Check XSS blacklist
+  for (const payload of BLACKLISTED_XSS_PAYLOADS) {
+    if (normalizedInput === payload.toLowerCase()) {
+      return true
+    }
+  }
+  
+  // Check NoSQL injection blacklist
+  for (const payload of BLACKLISTED_NOSQL_PAYLOADS) {
+    if (normalizedInput === payload.toLowerCase()) {
+      return true
+    }
+  }
+  
+  // Check command injection blacklist
+  for (const payload of BLACKLISTED_COMMAND_PAYLOADS) {
+    if (normalizedInput === payload.toLowerCase()) {
+      return true
+    }
+  }
+  
+  // Check header injection blacklist
+  for (const payload of BLACKLISTED_HEADER_PAYLOADS) {
+    if (normalizedInput === payload.toLowerCase()) {
+      return true
+    }
+  }
+  
+  return false
+}

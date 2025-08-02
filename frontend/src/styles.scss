@@ -11,12 +11,14 @@
   a:visited {
     color: mat.get-color-from-palette(map-get($theme, accent), lighter);
     text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   a:hover,
   a:focus,
   a:active {
     text-decoration: underline;
+    transform: translateY(-1px);
   }
 
   a {
@@ -27,6 +29,13 @@
 @mixin deluxe-membership-theme($theme) {
   .deluxe-membership {
     background: linear-gradient(90deg, mat.get-color-from-palette(map-get($theme, primary), 1) 0%, mat.get-color-from-palette(map-get($theme, background), card) 100%);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -37,10 +46,17 @@
 
   .ribbon::before {
     border: 5px solid mat.get-color-from-palette(map-get($theme, accent));
+    border-radius: 8px;
   }
 
   .ribbon span {
     background-color: mat.get-color-from-palette(map-get($theme, accent));
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .error {
@@ -49,22 +65,47 @@
 
   .ribbon-sold::before {
     border: 5px solid mat.get-color-from-palette(map-get($theme, warn));
+    border-radius: 8px;
   }
 
   .ribbon-sold span {
     background-color: mat.get-color-from-palette(map-get($theme, warn));
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .primary-notification {
     background-color: mat.get-color-from-palette(map-get($theme, primary), darker);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .accent-notification {
     background-color: mat.get-color-from-palette(map-get($theme, accent), darker);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .warn-notification {
     background-color: mat.get-color-from-palette(map-get($theme, warn), darker);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 }
 
@@ -72,8 +113,14 @@
   .img-thumbnail {
     background-color: mat.get-color-from-palette(map-get($theme, primary), 0.05);
     border: 1px solid mat.get-color-from-palette(map-get($theme, primary));
-    border-radius: 3px;
-    padding: 3px;
+    border-radius: 12px;
+    padding: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -88,6 +135,15 @@
 
   .star-border {
     stroke: mat.get-color-from-palette(map-get($theme, accent));
+  }
+  
+  // Modern star styling
+  svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }
 
@@ -156,6 +212,14 @@
   .mat-mdc-snack-bar-container {
     --mdc-snackbar-container-color: var(--theme-background-lighter);
     --mdc-snackbar-supporting-text-color: var(--theme-text);
+    border-radius: 12px !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .mat-mdc-snack-bar-container.errorBar {
@@ -170,12 +234,21 @@
 @mixin google-button($theme) {
   .google-button {
     background-color: mat.get-color-from-palette(map-get($theme, accent), darker) !important;
+    border-radius: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
 @mixin overlay-theme($theme) {
   .overlay {
     background: mat.get-color-from-palette(map-get($theme, primary), darker, 0.7);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -227,13 +300,74 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   @include css-vars($deeporange-indigo-theme);
 }
 
+.modern-dark-theme {
+  @include custom-components-theme($modern-dark-theme);
+  @include css-vars($modern-dark-theme);
+}
+
+.modern-light-theme {
+  @include custom-components-theme($modern-light-theme);
+  @include css-vars($modern-light-theme);
+}
+
 .close-dialog {
   float: right;
   width: fit-content;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 [hidden] {
   display: none !important;
+}
+
+// Global modern styling improvements
+body {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Modern scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// Modern focus styles
+.mat-mdc-button:focus,
+.mat-mdc-raised-button:focus,
+.mat-mdc-fab:focus,
+.mat-mdc-mini-fab:focus {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 2px;
+}
+
+// Modern selection styling
+::selection {
+  background: var(--theme-accent);
+  color: var(--theme-text);
+}
+
+::-moz-selection {
+  background: var(--theme-accent);
+  color: var(--theme-text);
 }
 
 .mat-expansion-panel-header {
@@ -265,22 +399,156 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   }
 }
 
+// Modern expansion panel styling
+.mat-expansion-panel {
+  border-radius: 12px !important;
+  margin: 8px 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
 #hacking-instructor code {
   background-color: $bg-hacking-instructor;
-  border-radius: 1px;
+  border-radius: 8px;
   font-family: monospace;
-  padding: 0 4px;
+  padding: 4px 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .CodeMirror {
   border-radius: 16px;
   height: 600px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+  }
 }
 
 div.mdc-card {
   padding: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .mat-mdc-button {
   white-space: nowrap;
+}
+
+// Modern UI Enhancements
+.modern-dark-theme {
+  // Enhanced shadows and depth
+  .mat-mdc-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  // Modern button styling
+  .mat-mdc-button {
+    border-radius: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Enhanced toolbar styling
+  mat-toolbar {
+    backdrop-filter: blur(20px);
+    background: rgba(26, 26, 26, 0.95) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  // Modern form fields
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      border-radius: 8px !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  // Enhanced navigation
+  .mat-sidenav {
+    backdrop-filter: blur(20px);
+    background: rgba(26, 26, 26, 0.95) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  // Modern snackbar
+  .mat-mdc-snack-bar-container {
+    border-radius: 12px !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.modern-light-theme {
+  // Enhanced shadows and depth
+  .mat-mdc-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  // Modern button styling
+  .mat-mdc-button {
+    border-radius: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Enhanced toolbar styling
+  mat-toolbar {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  // Modern form fields
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      border-radius: 8px !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Enhanced navigation
+  .mat-sidenav {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  // Modern snackbar
+  .mat-mdc-snack-bar-container {
+    border-radius: 12px !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }

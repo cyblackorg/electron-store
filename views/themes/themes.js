@@ -52,5 +52,19 @@ exports.themes = {
     navColor: '#E64A19',
     primLight: '#FF5722',
     primDark: '#BF360C'
+  },
+  'modern-dark': {
+    bgColor: '#1a1a1a',
+    textColor: '#FFFFFF',
+    navColor: '#3F51B5',
+    primLight: '#5C6BC0',
+    primDark: '#303F9F'
+  },
+  'modern-light': {
+    bgColor: '#FFFFFF',
+    textColor: '#000000',
+    navColor: '#1976D2',
+    primLight: '#42A5F5',
+    primDark: '#1565C0'
   }
 }

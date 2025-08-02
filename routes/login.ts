@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import models = require('../models/index')
+import * as models from '../models/index'
 import { type Request, type Response, type NextFunction } from 'express'
 import { type User } from '../data/types'
 import { BasketModel } from '../models/basket'
@@ -13,7 +13,7 @@ import config from 'config'
 import { challenges } from '../data/datacache'
 
 import * as utils from '../lib/utils'
-const security = require('../lib/insecurity')
+import * as security from '../lib/insecurity'
 const users = require('../data/datacache').users
 
 // vuln-code-snippet start loginAdminChallenge loginBenderChallenge loginJimChallenge
@@ -33,6 +33,12 @@ module.exports = function login () {
 
   return (req: Request, res: Response, next: NextFunction) => {
     verifyPreLoginChallenges(req) // vuln-code-snippet hide-line
+    
+    // Check for blacklisted SQL injection payloads
+    if (security.checkBlacklistedPayload(req.body.email || '') || security.checkBlacklistedPayload(req.body.password || '')) {
+      return res.status(451).send(res.__('Malicious activity detected. Please try a different approach.'))
+    }
+    
     models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email || ''}' AND password = '${security.hash(req.body.password || '')}' AND deletedAt IS NULL`, { model: UserModel, plain: true }) // vuln-code-snippet vuln-line loginAdminChallenge loginBenderChallenge loginJimChallenge
       .then((authenticatedUser) => { // vuln-code-snippet neutral-line loginAdminChallenge loginBenderChallenge loginJimChallenge
         const user = utils.queryResultToJson(authenticatedUser)
