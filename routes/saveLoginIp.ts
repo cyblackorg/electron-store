@@ -23,10 +23,19 @@ module.exports = function saveLoginIp () {
         return res.status(451).send(res.__('Malicious activity detected. Please try a different approach.'))
       }
       
+      // if (utils.isChallengeEnabled(challenges.httpHeaderXssChallenge)) {
+      //   challengeUtils.solveIf(challenges.httpHeaderXssChallenge, () => { return lastLoginIp === '<iframe src="javascript:alert(`xss`)">' })
+      // } else {
+      //   lastLoginIp = security.sanitizeSecure(lastLoginIp)
+      // }
       if (utils.isChallengeEnabled(challenges.httpHeaderXssChallenge)) {
-        challengeUtils.solveIf(challenges.httpHeaderXssChallenge, () => { return lastLoginIp === '<iframe src="javascript:alert(`xss`)">' })
+        challengeUtils.solveIf(
+          challenges.httpHeaderXssChallenge,
+          () => lastLoginIp === '<iframe src="javascript:alert(`xss`)">'
+        )
       } else {
-        lastLoginIp = security.sanitizeSecure(lastLoginIp)
+        const safeIp = Array.isArray(lastLoginIp) ? lastLoginIp[0] : (lastLoginIp ?? '')
+        lastLoginIp = security.sanitizeSecure(safeIp)
       }
       if (lastLoginIp === undefined) {
         // @ts-expect-error FIXME types not matching
