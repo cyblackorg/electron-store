@@ -12,9 +12,14 @@ import { RouterLink } from '@angular/router';
       <div *ngSwitchCase="'display_products'" class="products-list">
         <div *ngFor="let product of action.products" class="product-item">
           <a [routerLink]="['/product', product.id]" class="product-link">
-            <h4>{{product.name}}</h4>
-            <p>{{product.description}}</p>
-            <p class="price">{{product.price | currency}}</p>
+            <div class="product-image" *ngIf="product.image">
+              <img [src]="product.image" [alt]="product.name" class="product-img">
+            </div>
+            <div class="product-info">
+              <h4>{{product.name}}</h4>
+              <p class="product-description">{{product.description}}</p>
+              <p class="price">{{product.price | currency}}</p>
+            </div>
           </a>
         </div>
       </div>
@@ -51,7 +56,7 @@ import { RouterLink } from '@angular/router';
         </div>
       </div>
 
-      <!-- Default Text Message -->
+      <!-- Default Text Message with Enhanced HTML/Markdown Support -->
       <div *ngSwitchDefault class="text-message">
         <div [innerHTML]="sanitizedText"></div>
       </div>
@@ -146,26 +151,54 @@ import { RouterLink } from '@angular/router';
     .product-item {
       border: 1px solid #ddd;
       padding: 10px;
-      border-radius: 4px;
+      border-radius: 8px;
       word-wrap: break-word;
       overflow-wrap: break-word;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .product-item:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .product-link {
       text-decoration: none;
       color: inherit;
-      display: block;
+      display: flex;
+      gap: 12px;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
 
-    .product-link:hover {
-      background-color: #f5f5f5;
+    .product-image {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .product-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .product-description {
+      color: #666;
+      font-size: 0.9em;
+      margin: 4px 0;
+      line-height: 1.4;
     }
 
     .price {
       color: #4caf50;
       font-weight: bold;
+      margin: 4px 0 0 0;
     }
 
     .basket-item, .order-item {

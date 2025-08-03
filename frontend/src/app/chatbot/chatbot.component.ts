@@ -75,25 +75,35 @@ export class ChatbotComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit (): void {
-    this.chatbotService.getMessages().subscribe(
-      (messages) => {
-        this.messages = messages.map(msg => ({
-          author: msg.role === 'user' ? MessageSources.user : MessageSources.bot,
-          body: msg.message,
-          action: msg.action
-        }))
-        this.scrollToBottom()
-      },
-      (err) => console.error('Error loading messages:', err)
-    )
-
+    // First get the chatbot status (greeting message)
     this.chatbotService.getChatbotStatus().subscribe(
       (response) => {
-        this.messages.push({
+        // Add the greeting message first
+        this.messages = [{
           author: MessageSources.bot,
           body: response.body
-        })
+        }]
         this.scrollToBottom()
+        
+        // Then load any existing messages
+        this.chatbotService.getMessages().subscribe(
+          (messages) => {
+            // Only add user messages and bot responses, skip if it's the same as greeting
+            const existingMessages = messages.filter(msg => 
+              msg.role === 'user' || 
+              (msg.role === 'assistant' && msg.message !== response.body)
+            ).map(msg => ({
+              author: msg.role === 'user' ? MessageSources.user : MessageSources.bot,
+              body: msg.message,
+              action: msg.action
+            }))
+            
+            // Add existing messages after the greeting
+            this.messages.push(...existingMessages)
+            this.scrollToBottom()
+          },
+          (err) => console.error('Error loading messages:', err)
+        )
       },
       (err) => console.error('Error getting status:', err)
     )

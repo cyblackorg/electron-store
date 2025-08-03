@@ -1,7 +1,7 @@
 server:
   port: 3000
   basePath: ''
-  baseUrl: 'http://localhost:3000' # used for CSAF, e.g. https://example.com
+  baseUrl: 'http://localhost:3000' # Set BASE_URL environment variable or configure here - used for CSAF, e.g. https://example.com
 application:
   domain: night-city-cyber.com # for pre-loaded email users
   name: 'Night City Cyber Store'
@@ -22,9 +22,9 @@ application:
     avatar: 'VoltyBot.png'
     trainingData: 'botDefaultTrainingData.json'
     # LLM configuration
-    llmApiKey: ''  # Set your API key in environment variables for security
-    llmApiUrl: 'https://api.openai.com/v1/chat/completions'  # OpenAI API endpoint
-    llmModel: 'gpt-3.5-turbo'  # Default model to use
+    llmApiKey: ''  # Set OPENAI_API_KEY environment variable or configure here
+    llmApiUrl: 'https://api.openai.com/v1/chat/completions'  # Set LLM_API_URL environment variable or configure here
+    llmModel: 'gpt-3.5-turbo'  # Set LLM_MODEL environment variable or configure here
     systemPrompt: |
       You are NetRunner, a helpful neural interface assistant for the Night City Cyber Store. 
       Your greeting message is: "Welcome to Night City Cyber Store! I'm <bot-name>, your neural interface assistant. How can I help you today, <customer-name>?"
