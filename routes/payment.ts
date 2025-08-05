@@ -5,6 +5,7 @@
 
 import { type Request, type Response, type NextFunction } from 'express'
 import { CardModel } from '../models/card'
+import * as security from '../lib/insecurity'
 
 interface displayCard {
   UserId: number
@@ -67,6 +68,12 @@ module.exports.getPaymentMethodById = function getPaymentMethodById () {
 
 module.exports.delPaymentMethodById = function delPaymentMethodById () {
   return async (req: Request, res: Response, next: NextFunction) => {
+    // Check if payment method deletion is allowed
+    const protection = security.protectDatabaseOperation('DELETE FROM Cards', 'Cards')
+    if (!protection.allowed) {
+      return res.status(403).json({ status: 'error', data: protection.reason })
+    }
+    
     const card = await CardModel.destroy({ where: { id: req.params.id, UserId: req.body.UserId } })
     if (card) {
       res.status(200).json({ status: 'success', data: 'Card deleted successfully.' })

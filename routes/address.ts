@@ -5,6 +5,7 @@
 
 import { type Request, type Response } from 'express'
 import { AddressModel } from '../models/address'
+import * as security from '../lib/insecurity'
 
 module.exports.getAddress = function getAddress () {
   return async (req: Request, res: Response) => {
@@ -26,6 +27,12 @@ module.exports.getAddressById = function getAddressById () {
 
 module.exports.delAddressById = function delAddressById () {
   return async (req: Request, res: Response) => {
+    // Check if address deletion is allowed
+    const protection = security.protectDatabaseOperation('DELETE FROM Addresses', 'Addresses')
+    if (!protection.allowed) {
+      return res.status(403).json({ status: 'error', data: protection.reason })
+    }
+    
     const address = await AddressModel.destroy({ where: { id: req.params.id, UserId: req.body.UserId } })
     if (address) {
       res.status(200).json({ status: 'success', data: 'Address deleted successfully.' })

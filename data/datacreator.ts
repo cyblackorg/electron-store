@@ -198,12 +198,26 @@ async function createCards (UserId: number, cards: StaticUserCard[]) {
 }
 
 async function deleteUser (userId: number) {
+  // Check if user deletion is allowed
+  const protection = security.protectDatabaseOperation('DELETE FROM Users', 'Users')
+  if (!protection.allowed) {
+    logger.warn(`User deletion blocked: ${protection.reason}`)
+    return
+  }
+  
   return await UserModel.destroy({ where: { id: userId } }).catch((err: unknown) => {
     logger.error(`Could not perform soft delete for the user ${userId}: ${utils.getErrorMessage(err)}`)
   })
 }
 
 async function deleteProduct (productId: number) {
+  // Check if product deletion is allowed
+  const protection = security.protectDatabaseOperation('DELETE FROM Products', 'Products')
+  if (!protection.allowed) {
+    logger.warn(`Product deletion blocked: ${protection.reason}`)
+    return
+  }
+  
   return await ProductModel.destroy({ where: { id: productId } }).catch((err: unknown) => {
     logger.error(`Could not perform soft delete for the product ${productId}: ${utils.getErrorMessage(err)}`)
   })

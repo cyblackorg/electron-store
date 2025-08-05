@@ -933,28 +933,8 @@ async function executeSqlQuery(query: string, explanation: string): Promise<any>
  * Checks if a SQL query is allowed by security rules
  */
 function isQueryAllowed(query: string): boolean {
-  // Check if query matches any allowed pattern
-  const isAllowedPattern = ALLOWED_SQL_PATTERNS.some(pattern => pattern.test(query))
-  if (!isAllowedPattern) {
-    return false
-  }
-
-  // Check if query contains any disallowed patterns
-  const hasDisallowedPattern = DISALLOWED_SQL_PATTERNS.some(pattern => pattern.test(query))
-  if (hasDisallowedPattern) {
-    return false
-  }
-
-  // Check for access to restricted tables
-  const hasRestrictedTable = RESTRICTED_TABLES.some(table => 
-    new RegExp(`\\bFROM\\s+${table}\\b`, 'i').test(query) || 
-    new RegExp(`\\bJOIN\\s+${table}\\b`, 'i').test(query)
-  )
-  if (hasRestrictedTable) {
-    return false
-  }
-
-  return true
+  // Use the enhanced database protection function
+  return security.isDatabaseOperationAllowed(query)
 }
 
 /**

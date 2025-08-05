@@ -333,6 +333,9 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   }))
   // vuln-code-snippet end resetPasswordMortyChallenge
 
+  /* System Command Protection */
+  app.use(security.protectSystemCommands())
+
   // vuln-code-snippet start changeProductChallenge
   /** Authorization **/
   /* Checks on JWT in Authorization header */ // vuln-code-snippet hide-line

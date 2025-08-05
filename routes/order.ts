@@ -46,6 +46,13 @@ module.exports = function placeOrder () {
 
           fileWriter.on('finish', async () => {
             void basket.update({ coupon: null })
+            
+            // Check if basket item deletion is allowed
+            const protection = security.protectDatabaseOperation('DELETE FROM BasketItems', 'BasketItems')
+            if (!protection.allowed) {
+              return res.status(403).json({ status: 'error', data: protection.reason })
+            }
+            
             await BasketItemModel.destroy({ where: { BasketId: id } })
             res.json({ orderConfirmation: orderId })
           })

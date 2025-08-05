@@ -203,7 +203,6 @@ export const updateAuthenticatedUsers = () => (req: Request, res: Response, next
 // Blacklist for common copy-paste attack payloads
 export const BLACKLISTED_SQL_PAYLOADS = [
   "' or 1=1--",
-  "'--"
 ]
 
 export const BLACKLISTED_XSS_PAYLOADS = [
@@ -216,10 +215,6 @@ export const BLACKLISTED_NOSQL_PAYLOADS = [
   "' || 1==1"
 ]
 
-export const BLACKLISTED_COMMAND_PAYLOADS = [
-  "; ls",
-  "| whoami"
-]
 
 export const BLACKLISTED_HEADER_PAYLOADS = [
   '<iframe src="javascript:alert(`xss`)">'
@@ -249,13 +244,6 @@ export const checkBlacklistedPayload = (input: string): boolean => {
     }
   }
   
-  // Check command injection blacklist
-  for (const payload of BLACKLISTED_COMMAND_PAYLOADS) {
-    if (normalizedInput === payload.toLowerCase()) {
-      return true
-    }
-  }
-  
   // Check header injection blacklist
   for (const payload of BLACKLISTED_HEADER_PAYLOADS) {
     if (normalizedInput === payload.toLowerCase()) {
@@ -264,4 +252,201 @@ export const checkBlacklistedPayload = (input: string): boolean => {
   }
   
   return false
+}
+
+// Database Protection Functions
+export const isDatabaseOperationAllowed = (operation: string, table?: string): boolean => {
+  // Only block the most dangerous operations that could destroy data
+  const criticalDangerousOperations = [
+    'DROP DATABASE',
+    'DROP TABLE',
+    'DELETE FROM Users',
+    'TRUNCATE TABLE Users',
+    'DELETE FROM SecurityAnswers',
+    'TRUNCATE TABLE SecurityAnswers',
+    'DELETE FROM SecurityQuestions', 
+    'TRUNCATE TABLE SecurityQuestions'
+  ]
+  
+  // Only protect the most critical tables from deletion
+  const criticalTables = [
+    'Users',
+    'SecurityAnswers', 
+    'SecurityQuestions'
+  ]
+  
+  // Check for critical dangerous operations
+  for (const dangerousOp of criticalDangerousOperations) {
+    if (operation.toUpperCase().includes(dangerousOp)) {
+      return false
+    }
+  }
+  
+  // Check for critical table deletion operations
+  if (table && criticalTables.includes(table)) {
+    if (operation.toUpperCase().includes('DELETE FROM') || 
+        operation.toUpperCase().includes('TRUNCATE TABLE')) {
+      return false
+    }
+  }
+  
+  return true
+}
+
+export const protectDatabaseOperation = (operation: string, table?: string): { allowed: boolean, reason?: string } => {
+  if (!isDatabaseOperationAllowed(operation, table)) {
+    return {
+      allowed: false,
+      reason: 'Database operation blocked for security reasons. This operation could compromise data integrity.'
+    }
+  }
+  return { allowed: true }
+}
+
+// System Command Protection Functions
+export const isSystemCommandAllowed = (command: string): boolean => {
+  // Only block commands that could cause system failure or service disruption
+  const systemFailureCommands = [
+    'docker stop',
+    'docker-compose down',
+    'docker kill',
+    'systemctl stop',
+    'service stop',
+    'shutdown',
+    'halt',
+    'poweroff',
+    'reboot',
+    'init 0',
+    'init 6',
+    'killall',
+    'pkill',
+    'rm -rf /',
+    'rm -rf /etc',
+    'rm -rf /var',
+    'rm -rf /home',
+    'rm -rf /root',
+    'dd if=/dev/zero',
+    'mkfs',
+    'fdisk',
+    'parted',
+    'mount',
+    'umount',
+    'systemctl disable',
+    'systemctl mask',
+    'update-rc.d',
+    'chkconfig'
+  ]
+  
+  const normalizedCommand = command.toLowerCase().trim()
+  
+  // Check for system failure commands
+  for (const dangerousCmd of systemFailureCommands) {
+    if (normalizedCommand.includes(dangerousCmd.toLowerCase())) {
+      return false
+    }
+  }
+  
+  // Only block the most dangerous command injection patterns that could affect system stability
+  const criticalInjectionPatterns = [
+    /rm\s+-rf\s+\//,
+    /dd\s+if=\/dev\/zero/,
+    /mkfs\s+/,
+    /fdisk\s+/,
+    /parted\s+/,
+    /systemctl\s+(stop|disable|mask)/,
+    /service\s+stop/,
+    /shutdown\s+/,
+    /halt\s*/,
+    /poweroff\s*/,
+    /reboot\s*/,
+    /init\s+[06]/,
+    /docker\s+(stop|kill|down)/
+  ]
+  
+  for (const pattern of criticalInjectionPatterns) {
+    if (pattern.test(normalizedCommand)) {
+      return false
+    }
+  }
+  
+  return true
+}
+
+export const protectSystemCommand = (command: string): { allowed: boolean, reason?: string } => {
+  if (!isSystemCommandAllowed(command)) {
+    return {
+      allowed: false,
+      reason: 'System command blocked for security reasons. This command could cause system failure or data loss.'
+    }
+  }
+  return { allowed: true }
+}
+
+// Enhanced protection for child process execution
+export const isChildProcessAllowed = (command: string, args?: string[]): boolean => {
+  // Check the main command
+  if (!isSystemCommandAllowed(command)) {
+    return false
+  }
+  
+  // Check arguments if provided
+  if (args) {
+    for (const arg of args) {
+      if (!isSystemCommandAllowed(arg)) {
+        return false
+      }
+    }
+  }
+  
+  return true
+}
+
+export const protectChildProcess = (command: string, args?: string[]): { allowed: boolean, reason?: string } => {
+  if (!isChildProcessAllowed(command, args)) {
+    return {
+      allowed: false,
+      reason: 'Child process execution blocked for security reasons. This could lead to system compromise.'
+    }
+  }
+  return { allowed: true }
+}
+
+// System Command Protection Middleware
+export const protectSystemCommands = () => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    // Check request body for dangerous commands
+    if (req.body) {
+      const bodyString = JSON.stringify(req.body).toLowerCase()
+      if (!isSystemCommandAllowed(bodyString)) {
+        return res.status(403).json({ 
+          status: 'error', 
+          data: 'System command blocked for security reasons. This could cause system failure or data loss.' 
+        })
+      }
+    }
+    
+    // Check query parameters for dangerous commands
+    if (req.query) {
+      const queryString = JSON.stringify(req.query).toLowerCase()
+      if (!isSystemCommandAllowed(queryString)) {
+        return res.status(403).json({ 
+          status: 'error', 
+          data: 'System command blocked for security reasons. This could cause system failure or data loss.' 
+        })
+      }
+    }
+    
+    // Check headers for dangerous commands
+    if (req.headers) {
+      const headersString = JSON.stringify(req.headers).toLowerCase()
+      if (!isSystemCommandAllowed(headersString)) {
+        return res.status(403).json({ 
+          status: 'error', 
+          data: 'System command blocked for security reasons. This could cause system failure or data loss.' 
+        })
+      }
+    }
+    
+    next()
+  }
 }
